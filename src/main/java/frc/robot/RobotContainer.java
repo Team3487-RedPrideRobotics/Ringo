@@ -44,7 +44,7 @@ public class RobotContainer {
 
     public final AutonomousCommand m_auto = new AutonomousCommand();
 
-    public final TeleopCommand m_TeleopCommand = new TeleopCommand(m_drivetrain);
+    public final TeleopCommand m_TeleopCommand = new TeleopCommand(m_drivetrain, m_intake, m_climb, m_shoot);
 
 // Joysticks
 private final XboxController m_driveController = new XboxController(1);
@@ -73,6 +73,10 @@ private final XboxController m_operatorController = new XboxController(0);
 
   public XboxController getDriveController(){
     return m_driveController;
+  }
+
+  public XboxController getOperatorController(){
+    return m_operatorController;
   }
   
 

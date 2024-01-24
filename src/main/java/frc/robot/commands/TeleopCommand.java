@@ -4,17 +4,33 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
+import frc.robot.Constants.intakeEdits;
+import frc.robot.Constants.shootEdits;
+import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shoot;
 
 public class TeleopCommand extends Command {
 
     private Drivetrain m_drive;
+    private Intake m_intake;
+    private Climb m_climb;
+    private Shoot m_shoot;
 
-    public TeleopCommand(Drivetrain drive) {
+    public TeleopCommand(Drivetrain drive, Intake intake, Climb climb, Shoot shoot) {
 
         m_drive = drive;
         addRequirements(m_drive);
+
+        m_intake = intake;
+        addRequirements(m_intake);
+
+        m_climb = climb;
+        addRequirements(m_climb);
         
+        m_shoot = shoot;
+        addRequirements(m_shoot);
     }
 
     @Override
@@ -25,6 +41,7 @@ public class TeleopCommand extends Command {
     public void execute() {
 
     XboxController drive_controller = RobotContainer.getInstance().getDriveController();
+    XboxController operator_Controller = RobotContainer.getInstance().getOperatorController();
     
    
     if (drive_controller.getLeftY() >= 0.05) {
@@ -38,7 +55,20 @@ public class TeleopCommand extends Command {
         } else {
             m_drive.tankDrive(0, 0);
         }
-    
+        
+        if(drive_controller.getRightTriggerAxis() >= 0.05){
+            m_intake.intake(intakeEdits.intakeSpeed);
+        }
+        
+        if(operator_Controller.getRightTriggerAxis() >= 0.05){
+            m_shoot.shoot(shootEdits.shootSpeed);
+        }
+
+        if(operator_Controller.getRightY() >= 0.05 || operator_Controller.getRightY() <= -0.05){
+            m_climb.climb(operator_Controller.getRightY());
+        }
+
+
     }
         
 
