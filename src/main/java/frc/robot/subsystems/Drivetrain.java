@@ -14,7 +14,7 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
-
+import com.revrobotics.RelativeEncoder;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -26,6 +26,7 @@ public class Drivetrain extends SubsystemBase {
 
 private CANSparkMax left_Back_Motor;
 private CANSparkMax left_Front_Motor;
+private RelativeEncoder leftEncoder;
 
 
 private CANSparkMax right_Back_Motor;
@@ -48,6 +49,9 @@ private DifferentialDrive drive;
 
        right_Back_Motor.follow(right_Front_Motor);
 
+       leftEncoder = left_Front_Motor.getEncoder();
+       leftEncoder .setPositionConversionFactor(Constants.DriveConstants.EncoderConversionFactor);
+
        drive = new DifferentialDrive(left_Front_Motor, right_Front_Motor);
        drive.setSafetyEnabled(true);
        drive.setExpiration(0.1);
@@ -68,5 +72,8 @@ private DifferentialDrive drive;
         drive.tankDrive(-1*leftSpeed*Constants.DriveEdits.DriveSpeed, rightSpeed*Constants.DriveEdits.DriveSpeed);
     }
 
+     public double getLeftPosition(){
+        return leftEncoder.getPosition();
+    }
 }
 
