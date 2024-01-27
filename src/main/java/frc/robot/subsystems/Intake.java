@@ -37,12 +37,12 @@ public class Intake extends SubsystemBase {
     *
     */
     public Intake() {
-        floorIntake = new CANSparkMax(Constants.IntakeConstants.Intake_Motor_ID, CANSparkLowLevel.MotorType.kBrushless);
+        floorIntake = new CANSparkMax(Constants.intakeConstants.Intake_Motor_ID, CANSparkLowLevel.MotorType.kBrushless);
     }
 
     @Override
     public void periodic() {
-        // This method will be called once per scheduler run
+        Constants.intakeEdits.intakeSpeed = frc.robot.NTManager.intakeSpeedSub.get();
 
     }
 

@@ -6,6 +6,7 @@ import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.climbConstants;
 import frc.robot.Constants.climbEdits;
 
@@ -21,7 +22,7 @@ public class Climb extends SubsystemBase {
 
     @Override
     public void periodic() {
-
+        Constants.climbEdits.climbSpeed = frc.robot.NTManager.climbSpeedSub.get();
     }
 
     @Override
