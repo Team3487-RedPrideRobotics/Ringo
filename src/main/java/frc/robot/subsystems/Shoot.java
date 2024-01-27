@@ -13,6 +13,7 @@
 package frc.robot.subsystems;
 
 
+import frc.robot.Constants;
 import frc.robot.Constants.shootConstants;
 import frc.robot.commands.*;
 
@@ -36,7 +37,7 @@ public class Shoot extends SubsystemBase {
 
     @Override
     public void periodic() {
-
+        Constants.shootEdits.shootSpeed = frc.robot.NTManager.shootSpeedSub.get();
     }
 
     @Override
