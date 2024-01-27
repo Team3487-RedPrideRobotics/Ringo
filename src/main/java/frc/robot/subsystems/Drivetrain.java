@@ -65,6 +65,9 @@ private DifferentialDrive drive;
     }
 
     public void tankDrive(double leftSpeed, double rightSpeed){
+        System.out.println("Left:" + leftSpeed);
+        System.out.println("Right:" + rightSpeed);
+
         drive.tankDrive(-1*leftSpeed*Constants.DriveEdits.DriveSpeed, rightSpeed*Constants.DriveEdits.DriveSpeed);
     }
 
