@@ -15,21 +15,22 @@ public class AutoDrive extends AutonomousCommand {
         m_drive = drive;
         _distance = -distance;
         _drive_speed = drive_speed;
+        
     }
 
      @Override
     public void execute() {
-
+    System.out.println("Left Encoder:" + m_drive.getLeftPosition());
         if(_distance >= 0){
-            if(m_drive.getLeftPosition() >= _distance){
-                m_drive.tankDrive(1, 1);
+            if(m_drive.getLeftPosition() >= _distance ){
+                m_drive.tankDrive(0, 0);
                 done = true;
             }else{
                 m_drive.tankDrive(Math.abs(_drive_speed),Math.abs(_drive_speed));
             }
         }else{
-            if(m_drive.getLeftPosition() <= _distance){
-                m_drive.tankDrive(1, 1);
+            if(-m_drive.getLeftPosition() <= _distance){
+                m_drive.tankDrive(0, 0);
                 done = true;
             }else{
                 m_drive.tankDrive(-Math.abs(_drive_speed),-Math.abs(_drive_speed));
@@ -37,4 +38,12 @@ public class AutoDrive extends AutonomousCommand {
         }
         
     }
+
+    
+    @Override
+    public boolean isFinished() {
+        if(done) m_drive.resetEncoders();
+        return done;
+    }
+
 }

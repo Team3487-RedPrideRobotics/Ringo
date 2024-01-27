@@ -50,7 +50,7 @@ private DifferentialDrive drive;
        right_Back_Motor.follow(right_Front_Motor);
 
        leftEncoder = left_Front_Motor.getEncoder();
-       leftEncoder .setPositionConversionFactor(Constants.DriveConstants.EncoderConversionFactor);
+       leftEncoder.setPositionConversionFactor(Constants.DriveConstants.EncoderConversionFactor);
 
        drive = new DifferentialDrive(left_Front_Motor, right_Front_Motor);
        drive.setSafetyEnabled(true);
@@ -72,8 +72,12 @@ private DifferentialDrive drive;
         drive.tankDrive(-1*leftSpeed*Constants.DriveEdits.DriveSpeed, rightSpeed*Constants.DriveEdits.DriveSpeed);
     }
 
-     public double getLeftPosition(){
+    public double getLeftPosition(){
         return leftEncoder.getPosition();
+    }
+    
+    public void resetEncoders(){
+        leftEncoder.setPosition(0);
     }
 }
 

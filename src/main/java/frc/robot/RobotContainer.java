@@ -44,14 +44,13 @@ public class RobotContainer {
     public final Drivetrain m_drivetrain = new Drivetrain();
     public final Camera m_camera = new Camera();
 
-    public final AutonomousCommand m_auto = new AutonomousCommand();
-    public final AutoDrive m_autoD = new AutoDrive(m_drivetrain, 1, 1);
+    public final AutoDrive m_autoD = new AutoDrive(m_drivetrain, 50, 0.5);
 
     public final TeleopCommand m_TeleopCommand = new TeleopCommand(m_drivetrain, m_intake, m_climb, m_shoot, m_camera);
 
-// Joysticks
-private final XboxController m_driveController = new XboxController(1);
-private final XboxController m_operatorController = new XboxController(0);
+  // Joysticks
+  private final XboxController m_driveController = new XboxController(1);
+  private final XboxController m_operatorController = new XboxController(0);
 
   private RobotContainer() {
     configureButtonBindings();
@@ -67,7 +66,8 @@ private final XboxController m_operatorController = new XboxController(0);
   }
 
   public Command getAutonomousCommand() {
-    return m_auto;
+    return new AutoDrive(m_drivetrain, 50, 0.5)
+    .andThen(new AutoDrive(m_drivetrain, 150, 0.8));
   }
 
   public TeleopCommand getTeleopCommand(){
