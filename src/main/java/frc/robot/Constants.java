@@ -29,7 +29,7 @@ public class Constants {
     }
 
     public static final class DriveEdits {
-        public static final double DriveSpeed = 1;
+        public static double DriveSpeed = 1;
     }
 
     public static final class IntakeConstants{

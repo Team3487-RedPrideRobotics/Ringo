@@ -56,7 +56,7 @@ private DifferentialDrive drive;
 
     @Override
     public void periodic() {
-
+        Constants.DriveEdits.DriveSpeed = frc.robot.NTManager.driveSpeedSub.get();
     }
 
     @Override
@@ -65,9 +65,6 @@ private DifferentialDrive drive;
     }
 
     public void tankDrive(double leftSpeed, double rightSpeed){
-        System.out.println("Left:" + leftSpeed);
-        System.out.println("Right:" + rightSpeed);
-
         drive.tankDrive(-1*leftSpeed*Constants.DriveEdits.DriveSpeed, rightSpeed*Constants.DriveEdits.DriveSpeed);
     }
 
