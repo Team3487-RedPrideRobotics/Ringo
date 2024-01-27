@@ -14,6 +14,7 @@ package frc.robot;
 
 import frc.robot.commands.*;
 import frc.robot.commands.Autonomoose.AutoDrive;
+import frc.robot.commands.Autonomoose.AutoTurn;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -45,6 +46,7 @@ public class RobotContainer {
     public final Camera m_camera = new Camera();
 
     public final AutoDrive m_autoD = new AutoDrive(m_drivetrain, 50, 0.5);
+    public final AutoTurn m_autoT = new AutoTurn(m_drivetrain, 90, 0.5);
 
     public final TeleopCommand m_TeleopCommand = new TeleopCommand(m_drivetrain, m_intake, m_climb, m_shoot, m_camera);
 
@@ -66,8 +68,9 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return new AutoDrive(m_drivetrain, 50, 0.5)
-    .andThen(new AutoDrive(m_drivetrain, 150, 0.8));
+    //return new AutoDrive(m_drivetrain, 50, 0.5)
+    m_drivetrain.resetEncoders();
+    return new AutoTurn(m_drivetrain, 180, 0.2);
   }
 
   public TeleopCommand getTeleopCommand(){
