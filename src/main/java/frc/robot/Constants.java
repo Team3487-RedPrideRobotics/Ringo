@@ -31,14 +31,14 @@ public class Constants {
     }
 
     public static final class DriveEdits {
-        public static final double DriveSpeed = 1;
+        public static double DriveSpeed = 1;
     }
 
-    public static final class IntakeConstants{
+    public static final class intakeConstants{
         public static final int Intake_Motor_ID = 0;
     }
     public static final class intakeEdits{
-        public static final double intakeSpeed = 0.25;
+        public static double intakeSpeed = 0.25;
     }
 
     public static final class shootConstants{
@@ -47,7 +47,7 @@ public class Constants {
     }
 
     public static final class shootEdits{
-        public static final double shootSpeed =  1;
+        public static double shootSpeed =  1;
     }
 
     public static final class climbConstants{
@@ -56,7 +56,7 @@ public class Constants {
     }
 
     public static final class climbEdits{
-        public static final double climbSpeed = 1;
+        public static double climbSpeed = 1;
     }
 }
 

@@ -10,6 +10,7 @@ import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shoot;
+import frc.robot.subsystems.Camera;
 
 public class TeleopCommand extends Command {
 
@@ -17,8 +18,9 @@ public class TeleopCommand extends Command {
     private Intake m_intake;
     private Climb m_climb;
     private Shoot m_shoot;
+    private Camera m_camera;
 
-    public TeleopCommand(Drivetrain drive, Intake intake, Climb climb, Shoot shoot) {
+    public TeleopCommand(Drivetrain drive, Intake intake, Climb climb, Shoot shoot, Camera camera) {
 
         m_drive = drive;
         addRequirements(m_drive);
@@ -31,6 +33,9 @@ public class TeleopCommand extends Command {
         
         m_shoot = shoot;
         addRequirements(m_shoot);
+
+        m_camera = camera;
+        addRequirements(m_camera);
     }
 
     @Override
@@ -68,9 +73,13 @@ public class TeleopCommand extends Command {
             m_climb.climb(operator_Controller.getRightY());
         }
 
-
+        if(operator_Controller.getAButtonPressed()){
+           m_camera.Switch();
+           System.out.println("A Button Pressed");
+        }
     }
         
+
 
 
 
