@@ -53,7 +53,7 @@ private final XboxController m_operatorController = new XboxController(0);
 
   private RobotContainer() {
     configureButtonBindings();
-
+    NTManager.initialize();
   }
 
   public static RobotContainer getInstance() {
