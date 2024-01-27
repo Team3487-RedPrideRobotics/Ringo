@@ -56,7 +56,7 @@ private DifferentialDrive drive;
 
     @Override
     public void periodic() {
-
+        Constants.DriveEdits.DriveSpeed = frc.robot.NTManager.driveSpeedSub.get();
     }
 
     @Override
