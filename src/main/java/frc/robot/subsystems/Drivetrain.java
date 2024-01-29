@@ -43,6 +43,8 @@ private DifferentialDrive drive;
 
        left_Back_Motor.follow(left_Front_Motor);
 
+        left_Front_Motor.setInverted(true);
+
        right_Back_Motor = new CANSparkMax(Constants.DriveConstants.right_Back_Motor_ID, CANSparkLowLevel.MotorType.kBrushless);
        right_Front_Motor = new CANSparkMax(Constants.DriveConstants.right_Front_Motor_ID, CANSparkLowLevel.MotorType.kBrushless);
 
@@ -69,11 +71,15 @@ private DifferentialDrive drive;
     }
 
     public void straightDrive(double speed){
-        drive.tankDrive(speed, speed);
+        drive.tankDrive(-speed, speed);
     }
 
     public void turning(double speed){
-        drive.tankDrive(speed, -speed);
+        drive.tankDrive(speed, speed);
+    } 
+
+    public void arcadeDrive(double speed, double turning){
+        drive.arcadeDrive(speed * Constants.DriveEdits.DriveSpeed, turning * Constants.DriveEdits.DriveSpeed);
     }
 
 }

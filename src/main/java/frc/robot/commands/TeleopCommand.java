@@ -49,12 +49,11 @@ public class TeleopCommand extends Command {
     XboxController drive_controller = RobotContainer.getInstance().getDriveController();
     XboxController operator_Controller = RobotContainer.getInstance().getOperatorController();
     
-    if(drive_controller.getLeftY() >= 0.05){
-        m_drive.straightDrive(drive_controller.getLeftY() * DriveEdits.DriveSpeed);
-    }
-
-    if(drive_controller.getRightX() >= 0.05){
-        m_drive.turning(drive_controller.getRightX() * DriveEdits.DriveSpeed);
+    if(drive_controller.getLeftY() >= 0.05 
+    || drive_controller.getLeftY() <= -0.05 
+    || drive_controller.getRightX() >= 0.05 
+    || drive_controller.getRightX() <= -0.05){
+        m_drive.arcadeDrive(drive_controller.getLeftY(), drive_controller.getRightX());
     }
         
     if(drive_controller.getRightTriggerAxis() >= 0.05){
