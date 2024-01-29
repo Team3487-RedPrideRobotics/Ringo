@@ -9,13 +9,14 @@ public class AutoDrive extends AutonomousCommand {
     private double _distance;
     private double _drive_speed;
     private boolean done;
+    private double changedSpeed;
 
     public AutoDrive(Drivetrain drive, double distance, double drive_speed)
     {
         m_drive = drive;
         _distance = -distance;
         _drive_speed = drive_speed;
-        
+        changedSpeed = drive_speed;
     }
 
      @Override
@@ -36,7 +37,12 @@ public class AutoDrive extends AutonomousCommand {
                 m_drive.tankDrive(-Math.abs(_drive_speed),-Math.abs(_drive_speed));
             }
         }
-        
+        if(m_drive.getLeftPosition() <= value){
+            m_drive.tankDrive(_drive_speed, _drive_speed);   
+        } else if (m_drive.getLeftPosition() > value && m_drive.getLeftPosition() < _distance){
+            
+            m_drive.tankDrive(_drive_speed * .5, _drive_speed);
+        }
     }
 
     
