@@ -49,13 +49,13 @@ public class TeleopCommand extends Command {
     XboxController operator_Controller = RobotContainer.getInstance().getOperatorController();
     
    
-    if (drive_controller.getLeftY() >= 0.05) {
+    if (drive_controller.getLeftY() >= 0.25) {
             m_drive.tankDrive(drive_controller.getLeftY(), drive_controller.getRightY());
-        } else if(drive_controller.getLeftY() <= -0.05){
+        } else if(drive_controller.getLeftY() <= -0.25){
             m_drive.tankDrive(drive_controller.getLeftY(), drive_controller.getRightY());
-        } else if(drive_controller.getRightY() >= 0.05){
+        } else if(drive_controller.getRightY() >= 0.25){
             m_drive.tankDrive(drive_controller.getLeftY(), drive_controller.getRightY());
-        } else if(drive_controller.getRightY() <= -0.05){
+        } else if(drive_controller.getRightY() <= -0.25){
             m_drive.tankDrive(drive_controller.getLeftY(), drive_controller.getRightY());
         } else {
             m_drive.tankDrive(0, 0);
