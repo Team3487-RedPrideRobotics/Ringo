@@ -68,5 +68,13 @@ private DifferentialDrive drive;
         drive.tankDrive(-1*leftSpeed*Constants.DriveEdits.DriveSpeed, rightSpeed*Constants.DriveEdits.DriveSpeed);
     }
 
+    public void straightDrive(double speed){
+        drive.tankDrive(speed, speed);
+    }
+
+    public void turning(double speed){
+        drive.tankDrive(speed, -speed);
+    }
+
 }
 

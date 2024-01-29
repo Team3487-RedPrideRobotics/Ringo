@@ -4,6 +4,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
+import frc.robot.Constants.DriveEdits;
 import frc.robot.Constants.intakeEdits;
 import frc.robot.Constants.shootEdits;
 import frc.robot.subsystems.Climb;
@@ -48,20 +49,15 @@ public class TeleopCommand extends Command {
     XboxController drive_controller = RobotContainer.getInstance().getDriveController();
     XboxController operator_Controller = RobotContainer.getInstance().getOperatorController();
     
-   
-    if (drive_controller.getLeftY() >= 0.05) {
-            m_drive.tankDrive(drive_controller.getLeftY(), drive_controller.getRightY());
-        } else if(drive_controller.getLeftY() <= -0.05){
-            m_drive.tankDrive(drive_controller.getLeftY(), drive_controller.getRightY());
-        } else if(drive_controller.getRightY() >= 0.05){
-            m_drive.tankDrive(drive_controller.getLeftY(), drive_controller.getRightY());
-        } else if(drive_controller.getRightY() <= -0.05){
-            m_drive.tankDrive(drive_controller.getLeftY(), drive_controller.getRightY());
-        } else {
-            m_drive.tankDrive(0, 0);
-        }
+    if(drive_controller.getLeftY() >= 0.05){
+        m_drive.straightDrive(drive_controller.getLeftY() * DriveEdits.DriveSpeed);
+    }
+
+    if(drive_controller.getRightX() >= 0.05){
+        m_drive.turning(drive_controller.getRightX() * DriveEdits.DriveSpeed);
+    }
         
-        if(drive_controller.getRightTriggerAxis() >= 0.05){
+    if(drive_controller.getRightTriggerAxis() >= 0.05){
             m_intake.intake(intakeEdits.intakeSpeed);
         }
         
