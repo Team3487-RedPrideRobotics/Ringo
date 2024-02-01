@@ -12,43 +12,31 @@
 
 package frc.robot.subsystems;
 
-
-import frc.robot.Constants;
-import frc.robot.Constants.shootConstants;
-import frc.robot.commands.*;
-
-import com.revrobotics.CANSparkBase;
 import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
-
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
-public class Shoot extends SubsystemBase {
+public class IntakeSubsystem extends SubsystemBase {
+    private CANSparkMax floorIntake; 
 
-    private CANSparkMax leftShootMotor;
-    private CANSparkMax rightShootMotor;
-
-    public Shoot() {
-        leftShootMotor = new CANSparkMax(shootConstants.left_Shoot_Motor_ID, CANSparkLowLevel.MotorType.kBrushless);
-        rightShootMotor = new CANSparkMax(shootConstants.right_Shoot_Motor_ID, CANSparkLowLevel.MotorType.kBrushless);
+    public IntakeSubsystem() {
+        floorIntake = new CANSparkMax(Constants.intakeConstants.Intake_Motor_ID, CANSparkLowLevel.MotorType.kBrushless);
     }
 
     @Override
     public void periodic() {
-        Constants.shootEdits.shootSpeed = frc.robot.NTManager.shootSpeedSub.get();
+        //TODO this code probably belongs in the NTManager class
+        Constants.intakeEdits.intakeSpeed = frc.robot.NTManager.intakeSpeedSub.get();
     }
 
     @Override
     public void simulationPeriodic() {
-
     }
 
-    public void shoot(double speed){
-        leftShootMotor.set(speed);
-        rightShootMotor.set(-speed);
+    public void intake(double speed){
+        floorIntake.set(speed);   
     }
-
 }
 
