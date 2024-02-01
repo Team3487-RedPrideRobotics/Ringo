@@ -59,6 +59,7 @@ private DifferentialDrive drive;
     @Override
     public void periodic() {
         Constants.DriveEdits.DriveSpeed = frc.robot.NTManager.driveSpeedSub.get();
+        Constants.DriveEdits.TurnSpeed = frc.robot.NTManager.driveSpeedSub.get();
     }
 
     @Override
@@ -72,7 +73,7 @@ private DifferentialDrive drive;
 
 
     public void arcadeDrive(double speed, double turning){
-        drive.arcadeDrive(speed * Constants.DriveEdits.DriveSpeed, turning * Constants.DriveEdits.DriveSpeed);
+        drive.arcadeDrive(speed * Constants.DriveEdits.DriveSpeed, turning * Constants.DriveEdits.TurnSpeed);
     }
 
 }
