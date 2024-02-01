@@ -2,6 +2,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
+import frc.robot.Constants.DriveEdits;
 import frc.robot.Constants.intakeEdits;
 import frc.robot.Constants.shootEdits;
 import frc.robot.subsystems.ClimbSubsystem;
@@ -52,20 +53,19 @@ public class TeleopCommand extends Command {
                 drive_controller.getRightY() >= 0.25 ||
                 drive_controller.getRightY() <= -0.25
         ) {
-            m_drive.tankDrive(drive_controller.getLeftY(), drive_controller.getRightY());
+            m_drive.arcadeDrive(drive_controller.getLeftY(), drive_controller.getRightX());
         }
         else {
-            m_drive.tankDrive(0, 0);
+            m_drive.arcadeDrive(0, 0);
         }
         
-        //TODO control speed with trigger value?
         if (drive_controller.getRightTriggerAxis() >= 0.05) {
-            m_intake.intake(intakeEdits.intakeSpeed);
-        } //TODO verify priority of shoot vs intake. Currently, shoot will override intake
+            m_intake.intake(drive_controller.getRightTriggerAxis());
+        } 
+        
         //endregion
         
         //region Setup operator controls
-        //TODO Verify that driver intakes but operator shoots
         if (operator_controller.getRightTriggerAxis() >= 0.05) {
             m_shoot.shoot(shootEdits.shootSpeed);
         }

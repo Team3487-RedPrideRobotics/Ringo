@@ -8,7 +8,10 @@ public class NTManager {
     
     public static DoubleSubscriber driveSpeedSub;
     public static DoublePublisher driveSpeedPub;
-    
+
+    public static DoubleSubscriber turnSpeedSub;
+    public static DoublePublisher turnSpeedPub;
+
     public static DoubleSubscriber intakeSpeedSub;
     public static DoublePublisher intakeSpeedPub;
     
@@ -26,6 +29,12 @@ public class NTManager {
         driveSpeedPub = driveSpeedTopic.publish();
         driveSpeedPub.setDefault(Constants.DriveEdits.DriveSpeed);
         driveSpeedSub = driveSpeedTopic.subscribe(Constants.DriveEdits.DriveSpeed);
+
+        var turnSpeedTopic = speedTable.getDoubleTopic("Turn Speed");
+        turnSpeedPub = turnSpeedTopic.publish();
+        turnSpeedPub.setDefault(Constants.DriveEdits.TurnSpeed);
+        turnSpeedSub = turnSpeedTopic.subscribe(Constants.DriveEdits.TurnSpeed);
+
         
         var intakeSpeed = speedTable.getDoubleTopic("Intake Speed");
         intakeSpeedPub = intakeSpeed.publish();
