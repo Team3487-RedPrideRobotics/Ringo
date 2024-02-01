@@ -46,8 +46,8 @@ public class DriveSubsystem extends SubsystemBase {
     
     @Override
     public void periodic() {
-        //TODO this code probably belongs in the NTManager class
         Constants.DriveEdits.DriveSpeed = frc.robot.NTManager.driveSpeedSub.get();
+        Constants.DriveEdits.TurnSpeed = frc.robot.NTManager.turnSpeedSub.get();
     }
     
     @Override
@@ -55,8 +55,8 @@ public class DriveSubsystem extends SubsystemBase {
     
     }
     
-    public void tankDrive(double leftSpeed, double rightSpeed) {
-        drive.tankDrive(-1 * leftSpeed * Constants.DriveEdits.DriveSpeed, rightSpeed * Constants.DriveEdits.DriveSpeed);
+    public void arcadeDrive(double Speed, double Turning) {
+        drive.arcadeDrive(Speed * Constants.DriveEdits.DriveSpeed , Turning * Constants.DriveEdits.TurnSpeed);
     }
     
 }
