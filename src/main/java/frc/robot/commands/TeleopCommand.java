@@ -9,6 +9,7 @@ import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
+import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.CameraSubsystem;
 
 public class TeleopCommand extends Command {
@@ -17,11 +18,12 @@ public class TeleopCommand extends Command {
     private ClimbSubsystem m_climb;
     private ShootSubsystem m_shoot;
     private CameraSubsystem m_camera;
+    private ArmSubsystem m_arm;
     
     private XboxController drive_controller;
     private XboxController operator_controller;
     
-    public TeleopCommand(DriveSubsystem drive, IntakeSubsystem intake, ClimbSubsystem climb, ShootSubsystem shoot, CameraSubsystem camera) {
+    public TeleopCommand(DriveSubsystem drive, IntakeSubsystem intake, ClimbSubsystem climb, ShootSubsystem shoot, CameraSubsystem camera, ArmSubsystem arm) {
         
         m_drive = drive;
         addRequirements(m_drive);
@@ -37,6 +39,8 @@ public class TeleopCommand extends Command {
         
         m_camera = camera;
         addRequirements(m_camera);
+
+        m_arm = arm;
     }
     
     @Override
@@ -50,8 +54,8 @@ public class TeleopCommand extends Command {
         //region Setup driver controls
         if (drive_controller.getLeftY() >= 0.25 ||
                 drive_controller.getLeftY() <= -0.25 ||
-                drive_controller.getRightY() >= 0.25 ||
-                drive_controller.getRightY() <= -0.25
+                drive_controller.getRightX() >= 0.25 ||
+                drive_controller.getRightX() <= -0.25
         ) {
             m_drive.arcadeDrive(drive_controller.getLeftY(), drive_controller.getRightX());
         }
@@ -77,6 +81,10 @@ public class TeleopCommand extends Command {
         if (operator_controller.getAButtonPressed()) {
             m_camera.Switch();
         }
+
+        if (operator_controller.getRightY() >= 0.05 || operator_controller.getRightY() <= -0.05){
+            m_arm.armMotors(operator_controller.getRightY());
+        }    
         //endregion
     }
     

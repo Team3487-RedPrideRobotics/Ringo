@@ -38,9 +38,10 @@ public class RobotContainer {
   public final IntakeSubsystem m_intake = new IntakeSubsystem();
   public final DriveSubsystem m_drive = new DriveSubsystem();
   public final CameraSubsystem m_camera = new CameraSubsystem();
+  public final ArmSubsystem m_arm = new ArmSubsystem();
   
   public final AutonomousCommand m_auto = new AutonomousCommand();
-  public final TeleopCommand m_TeleopCommand = new TeleopCommand(m_drive, m_intake, m_climb, m_shoot, m_camera);
+  public final TeleopCommand m_TeleopCommand = new TeleopCommand(m_drive, m_intake, m_climb, m_shoot, m_camera, m_arm);
   
   // Joysticks
   private final XboxController m_driveController = new XboxController(1);

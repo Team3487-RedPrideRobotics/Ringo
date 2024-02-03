@@ -57,5 +57,14 @@ public class Constants {
     public static final class climbEdits{
         public static double climbSpeed = 1;
     }
+
+    public static final class armEdits{
+        public static double armSpeed = 1;
+    }
+
+    public static final class armConstants{
+        public static final int left_Arm_Motor_ID = 9;
+        public static final int right_Arm_Motor_ID = 10;
+    }
 }
 

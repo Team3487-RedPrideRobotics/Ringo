@@ -32,6 +32,8 @@ public class DriveSubsystem extends SubsystemBase {
         left_Front_Motor = new CANSparkMax(Constants.DriveConstants.left_Front_Motor_ID, CANSparkLowLevel.MotorType.kBrushless);
         
         left_Back_Motor.follow(left_Front_Motor);
+
+        left_Front_Motor.setInverted(true);
         
         right_Back_Motor = new CANSparkMax(Constants.DriveConstants.right_Back_Motor_ID, CANSparkLowLevel.MotorType.kBrushless);
         right_Front_Motor = new CANSparkMax(Constants.DriveConstants.right_Front_Motor_ID, CANSparkLowLevel.MotorType.kBrushless);
@@ -48,6 +50,7 @@ public class DriveSubsystem extends SubsystemBase {
     public void periodic() {
         //TODO this code probably belongs in the NTManager class
         Constants.DriveEdits.DriveSpeed = frc.robot.NTManager.driveSpeedSub.get();
+        Constants.DriveEdits.TurnSpeed = frc.robot.NTManager.turnSpeedSub.get();
     }
     
     @Override
@@ -55,8 +58,8 @@ public class DriveSubsystem extends SubsystemBase {
     
     }
     
-    public void tankDrive(double leftSpeed, double rightSpeed) {
-        drive.tankDrive(-1 * leftSpeed * Constants.DriveEdits.DriveSpeed, rightSpeed * Constants.DriveEdits.DriveSpeed);
+    public void arcadeDrive(double speed, double turning) {
+        drive.arcadeDrive(speed * Constants.DriveEdits.DriveSpeed, turning * Constants.DriveEdits.TurnSpeed);
     }
     
 }
