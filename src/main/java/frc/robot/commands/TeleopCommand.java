@@ -41,6 +41,7 @@ public class TeleopCommand extends Command {
         addRequirements(m_camera);
 
         m_arm = arm;
+        //addRequirments has an error code here, we should not need to fix it due to the Arm Subsystem only having one method.
     }
     
     @Override
