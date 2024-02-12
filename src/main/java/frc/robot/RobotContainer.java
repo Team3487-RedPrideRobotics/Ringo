@@ -14,7 +14,6 @@ package frc.robot;
 
 import frc.robot.commands.*;
 import frc.robot.commands.Autonomoose.AutoDrive;
-import frc.robot.commands.Autonomoose.AutoTurn;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.XboxController;
 
@@ -63,8 +62,9 @@ public class RobotContainer {
   
   public Command getAutonomousCommand() {
     //return new AutoDrive(m_drivetrain, 50, 0.5)
-    m_drivetrain.resetEncoders();
-    return new AutoTurn(m_drivetrain, 180, 0.2);
+    m_drive.resetEncoders();
+    m_arm.resetEncoder();
+    return new AutoDrive(m_drive, 180, 0.2, 0);
   }
   
   public TeleopCommand getTeleopCommand() {
