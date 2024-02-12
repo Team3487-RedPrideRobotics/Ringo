@@ -20,6 +20,12 @@ public class NTManager {
     
     public static DoubleSubscriber shootSpeedSub;
     public static DoublePublisher shootSpeedPub;
+
+    public static DoubleSubscriber slowShootSpeedSub;
+    public static DoublePublisher slowShootSpeedPub;
+
+    public static DoubleSubscriber armSpeedSub;
+    public static DoublePublisher armSpeedPub;
     
     public static void initialize() {
         var networkTable = NetworkTableInstance.getDefault();
@@ -35,7 +41,6 @@ public class NTManager {
         turnSpeedPub.setDefault(Constants.DriveEdits.TurnSpeed);
         turnSpeedSub = turnSpeedTopic.subscribe(Constants.DriveEdits.TurnSpeed);
 
-        
         var intakeSpeed = speedTable.getDoubleTopic("Intake Speed");
         intakeSpeedPub = intakeSpeed.publish();
         intakeSpeedPub.setDefault(Constants.intakeEdits.intakeSpeed);
@@ -48,7 +53,18 @@ public class NTManager {
         
         var shootSpeedTopic = speedTable.getDoubleTopic("Shoot Speed");
         shootSpeedPub = shootSpeedTopic.publish();
-        shootSpeedPub.setDefault(Constants.DriveEdits.DriveSpeed);
-        shootSpeedSub = shootSpeedTopic.subscribe(Constants.DriveEdits.DriveSpeed);
+        shootSpeedPub.setDefault(Constants.shootEdits.shootSpeed);
+        shootSpeedSub = shootSpeedTopic.subscribe(Constants.shootEdits.shootSpeed);
+
+        var slowShootSpeedTopic = speedTable.getDoubleTopic("Slow Shoot Speed");
+        slowShootSpeedPub = slowShootSpeedTopic.publish();
+        slowShootSpeedPub.setDefault(Constants.shootEdits.slowShootSpeed);
+        slowShootSpeedSub = shootSpeedTopic.subscribe(Constants.shootEdits.slowShootSpeed);
+
+        var armSpeedTopic = speedTable.getDoubleTopic("Arm Speed");
+        armSpeedPub = armSpeedTopic.publish();
+        armSpeedPub.setDefault(Constants.shootEdits.shootSpeed);
+        armSpeedSub = armSpeedTopic.subscribe(Constants.shootEdits.shootSpeed);
+
     }
 }

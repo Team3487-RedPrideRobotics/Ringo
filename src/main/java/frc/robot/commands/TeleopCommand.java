@@ -65,17 +65,29 @@ public class TeleopCommand extends Command {
         
         if (drive_controller.getRightTriggerAxis() >= 0.05) {
             m_intake.intake(drive_controller.getRightTriggerAxis());
-        } 
+        } else if (drive_controller.getLeftTriggerAxis() >= 0.05){
+            m_intake.intake(-drive_controller.getLeftTriggerAxis());
+        } else {
+            m_intake.intake(0);
+        }
         
         //endregion
         
         //region Setup operator controls
         if (operator_controller.getRightTriggerAxis() >= 0.05) {
+            m_shoot.shoot(-shootEdits.shootSpeed);
+        } else if(operator_controller.getLeftTriggerAxis() >= 0.05) {
             m_shoot.shoot(shootEdits.shootSpeed);
+        } else if(operator_controller.getRightBumper()){
+            m_shoot.shoot(shootEdits.slowShootSpeed);
+        } else {
+            m_shoot.shoot(0);
         }
         
-        if (operator_controller.getRightY() >= 0.05 || operator_controller.getRightY() <= -0.05) {
-            m_climb.climb(operator_controller.getRightY());
+        if (operator_controller.getLeftY() >= 0.05 || operator_controller.getLeftY() <= -0.05) {
+            m_climb.climb(operator_controller.getLeftY());
+        } else {
+            m_climb.climb(0);
         }
         
         if (operator_controller.getAButtonPressed()) {
@@ -84,7 +96,9 @@ public class TeleopCommand extends Command {
 
         if (operator_controller.getRightY() >= 0.05 || operator_controller.getRightY() <= -0.05){
             m_arm.armMotors(operator_controller.getRightY());
-        }    
+        } else{
+            m_arm.armMotors(0);
+        }
         //endregion
     }
     

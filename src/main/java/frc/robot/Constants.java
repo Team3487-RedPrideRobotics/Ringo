@@ -22,10 +22,10 @@ package frc.robot;
 public class Constants {
    
     public static final class DriveConstants {
-        public static final int left_Front_Motor_ID = 1;
+        public static final int left_Front_Motor_ID = 3;
         public static final int left_Back_Motor_ID = 4;
-        public static final int right_Front_Motor_ID = 2;
-        public static final int right_Back_Motor_ID = 3; 
+        public static final int right_Front_Motor_ID = 9;
+        public static final int right_Back_Motor_ID = 10; 
     }
 
     public static final class DriveEdits {
@@ -34,24 +34,25 @@ public class Constants {
     }
 
     public static final class intakeConstants{
-        public static final int Intake_Motor_ID = 0;
+        public static final int Intake_Motor_ID = 2;
     }
     public static final class intakeEdits{
-        public static double intakeSpeed = 0.25;
+        public static double intakeSpeed = 1;
     }
 
     public static final class shootConstants{
-        public static final int left_Shoot_Motor_ID = 5;
-        public static final int right_Shoot_Motor_ID = 6;
+        public static final int left_Shoot_Motor_ID = 6;
+        public static final int right_Shoot_Motor_ID = 7;
     }
 
     public static final class shootEdits{
         public static double shootSpeed =  1;
+        public static double slowShootSpeed = 0.2;
     }
 
     public static final class climbConstants{
-        public static final int left_Climb_Motor_ID = 7;
-        public static final int right_Climb_Motor_ID = 8;
+        public static final int left_Climb_Motor_ID = 1;
+        public static final int right_Climb_Motor_ID = 11;
 
         public static final int top_Climb_Switch_ID = 1;
         public static final int bottom_Climb_Switch_ID = 0;
@@ -62,12 +63,12 @@ public class Constants {
     }
 
     public static final class armEdits{
-        public static double armSpeed = 1;
+        public static double armSpeed = 0.5;
     }
 
     public static final class armConstants{
-        public static final int left_Arm_Motor_ID = 9;
-        public static final int right_Arm_Motor_ID = 10;
+        public static final int left_Arm_Motor_ID = 5;
+        public static final int right_Arm_Motor_ID = 8;
     }
 }
 
