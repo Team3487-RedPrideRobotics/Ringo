@@ -12,22 +12,19 @@
 
 package frc.robot.subsystems;
 
-
 import frc.robot.Constants;
 import frc.robot.Constants.shootConstants;
-
 import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-
-public class Shoot extends SubsystemBase {
-
+public class ShootSubsystem extends SubsystemBase {
     private CANSparkMax leftShootMotor;
     private CANSparkMax rightShootMotor;
 
-    public Shoot() {
+    //TODO motor ids should probably be arguments passed to the constructor
+    public ShootSubsystem() {
         leftShootMotor = new CANSparkMax(shootConstants.left_Shoot_Motor_ID, CANSparkLowLevel.MotorType.kBrushless);
         rightShootMotor = new CANSparkMax(shootConstants.right_Shoot_Motor_ID, CANSparkLowLevel.MotorType.kBrushless);
     }
@@ -35,11 +32,11 @@ public class Shoot extends SubsystemBase {
     @Override
     public void periodic() {
         Constants.shootEdits.shootSpeed = frc.robot.NTManager.shootSpeedSub.get();
+        Constants.shootEdits.slowShootSpeed = frc.robot.NTManager.slowShootSpeedSub.get();
     }
 
     @Override
     public void simulationPeriodic() {
-
     }
 
     public void shoot(double speed){
