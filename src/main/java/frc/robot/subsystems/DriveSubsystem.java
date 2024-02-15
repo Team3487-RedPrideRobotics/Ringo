@@ -14,9 +14,12 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+
 
 public class DriveSubsystem extends SubsystemBase {
     
@@ -24,7 +27,8 @@ public class DriveSubsystem extends SubsystemBase {
     private CANSparkMax left_Front_Motor;
     private CANSparkMax right_Back_Motor;
     private CANSparkMax right_Front_Motor;
-    
+    private RelativeEncoder leftEncoder;
+    private RelativeEncoder rightEncoder;
     private DifferentialDrive drive;
     
     public DriveSubsystem() {
@@ -44,6 +48,11 @@ public class DriveSubsystem extends SubsystemBase {
         drive.setSafetyEnabled(true);
         drive.setExpiration(0.1);
         drive.setMaxOutput(1.0);
+
+        leftEncoder = left_Front_Motor.getEncoder();
+        leftEncoder .setPositionConversionFactor(Constants.DriveConstants.EncoderConversionFactor);
+        rightEncoder = right_Front_Motor.getEncoder();
+        rightEncoder.setPositionConversionFactor(Constants.DriveConstants.EncoderConversionFactor);
     }
     
     @Override
@@ -59,6 +68,19 @@ public class DriveSubsystem extends SubsystemBase {
     
     public void arcadeDrive(double speed, double turning) {
         drive.arcadeDrive(speed * Constants.DriveEdits.DriveSpeed, turning * Constants.DriveEdits.TurnSpeed);
+    }
+
+    public double getLeftDriveEncoder(){
+        return leftEncoder.getPosition();
+    }
+
+    public double getRightDriveEncoder(){
+        return rightEncoder.getPosition();
+    }
+
+    public void resetEncoders(){
+        leftEncoder.setPosition(0);
+        rightEncoder.setPosition(0);
     }
     
 }
