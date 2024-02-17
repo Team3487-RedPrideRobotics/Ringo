@@ -1,8 +1,10 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants.armEdits;
 import frc.robot.Constants.intakeEdits;
 import frc.robot.Constants.shootEdits;
+import frc.robot.Constants.armConstants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.CameraSubsystem;
@@ -97,12 +99,18 @@ public class TeleopCommand extends Command {
         if (operator_controller.getAButtonPressed()) {
             m_camera.Switch();
         }
+        
+        //How far arm is from stopping point
+        double arm_from_stop = m_arm.getPosition() / armConstants.stop_distance;
+        
 
-        if (operator_controller.getRightY() >= 0.05 || operator_controller.getRightY() <= -0.05){
-            m_arm.armMotors(operator_controller.getRightY());
-        } else{
-            m_arm.armMotors(0);
-        }
+        if(arm_from_stop < armConstants.distance_from_stop){
+            armEdits.arm_speed_multiplier = 1;
+        } else if(arm_from_stop > armConstants.distance_from_stop && arm_from_stop < armConstants.stop_distance){
+            armEdits.arm_speed_multiplier = Math.pow(armEdits.arm_speed_multiplier, (-1 * arm_from_stop * 0.01));
+        } else if(arm_from_stop >= 0.95){
+            armEdits.arm_speed_multiplier = 0;
+        } 
         //endregion
     }
     
