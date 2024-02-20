@@ -1,51 +1,59 @@
 package frc.robot.commands.Autonomoose;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.commands.AutonomousCommand;
+import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class AutoDrive extends AutonomousCommand {
-    private DriveSubsystem m_drive;
-    private double _distance;
-    private double _drive_speed;
-    private double _turn_speed;
+    private DriveSubsystem driveSubsystem;
+    private double driveSpeed;
+    private double distance;
     private boolean done;
+    private Timer timer;
+    
+    public AutoDrive(DriveSubsystem _DriveSubsystem, double _driveSpeed, double distance){
+        driveSubsystem = _DriveSubsystem;
+        addRequirements(driveSubsystem);
+        distance = -distance;
+        driveSpeed = _driveSpeed;
 
-    public AutoDrive(DriveSubsystem drive, double distance, double drive_speed, double turn_speed)
-    {
-        m_drive = drive;
-        _distance = -distance;
-        _drive_speed = drive_speed;
-        _turn_speed = turn_speed;
+        done = false;
+        driveSubsystem.resetEncoders();
 
     }
 
-     @Override
-    public void execute() {
-    System.out.println("Left Encoder:" + m_drive.getLeftDriveEncoder() + "Right Encoder: " + m_drive.getRightDriveEncoder());
-        if(_distance >= 0){
-            if(m_drive.getLeftDriveEncoder() >= _distance ){
-                m_drive.arcadeDrive(0, 0);
+    @Override
+    public void execute(){
+        //System.out.println("Left Encoder:" + driveSubsystem.getLeftDriveEncoder());
+        System.out.println("only god knows");
+        if(distance >= 0){
+            if(driveSubsystem.getLeftDriveEncoder() >= distance ){
+                driveSubsystem.tankDrive(0, 0);
                 done = true;
             }else{
-                m_drive.arcadeDrive(Math.abs(_drive_speed),Math.abs(_turn_speed));
+                driveSubsystem.tankDrive(Math.abs(driveSpeed),Math.abs(driveSpeed));
             }
         }else{
-            if(-m_drive.getLeftDriveEncoder() <= _distance){
-                m_drive.arcadeDrive(0, 0);
+            if(-driveSubsystem.getLeftDriveEncoder() <= distance){
+                driveSubsystem.tankDrive(0, 0);
                 done = true;
             }else{
-                m_drive.arcadeDrive(-Math.abs(_drive_speed),-Math.abs(_turn_speed));
+                driveSubsystem.tankDrive(-Math.abs(driveSpeed),-Math.abs(driveSpeed));
             }
         }
-        
     }
-
-    
     @Override
     public boolean isFinished() {
-        if(done) m_drive.resetEncoders();
+        if(done) driveSubsystem.resetEncoders();
         return done;
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        driveSubsystem.tankDrive(0, 0);
     }
 
 }
