@@ -111,6 +111,10 @@ public class TeleopCommand extends Command {
         } else if(arm_from_stop >= 0.95){
             armEdits.arm_speed_multiplier = 0;
         } 
+
+        if(operator_controller.getRightY() >= 0.05 || operator_controller.getRightY() <= -0.05){
+            m_arm.armMotors(operator_controller.getLeftY());
+        } 
         //endregion
     }
     

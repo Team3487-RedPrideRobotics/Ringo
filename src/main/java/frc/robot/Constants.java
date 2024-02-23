@@ -72,7 +72,7 @@ public class Constants {
     public static final class armConstants{
         public static final int left_Arm_Motor_ID = 5;
         public static final int right_Arm_Motor_ID = 8;
-        public static final double stop_distance = 42069;
+        public static final double stop_distance = 5;
         public static final double distance_from_stop = .75;
 
 
