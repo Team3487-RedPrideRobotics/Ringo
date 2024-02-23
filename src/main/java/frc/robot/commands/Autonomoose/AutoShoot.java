@@ -9,26 +9,28 @@ import frc.robot.subsystems.ShootSubsystem;
 public class AutoShoot extends AutonomousCommand {
     private Timer timer;
     private ShootSubsystem _shoot;
-    private IntakeSubsystem _intake;
-    private double _intakeSpeed; 
     private double _waitTime;
+    private boolean done;
 
-    public AutoShoot(ShootSubsystem shoot, IntakeSubsystem intake, double intakeSpeed, double waitTime){
-        _shoot = shoot;
-        _intake = intake;
-        _intakeSpeed = intakeSpeed;
+    public AutoShoot(ShootSubsystem shoo, double waitTime){
+        _shoot = shoo;
         _waitTime = waitTime;
         timer.start();
+        done = false;
     }
 
     @Override
     public void execute(){
-        _shoot.shoot(1);
-        if(timer.get() >= _waitTime){
-            _intake.intake(_intakeSpeed);
-        } else if(timer.get() >= _waitTime + .5){
-           _shoot.shoot(0);
-           _intake.intake(0); 
+        if (timer.get() < _waitTime) {
+            _shoot.shoot(1);    
+        } else {
+            _shoot.shoot(0);
+            done = true;
         }
+    }
+
+    @Override
+    public boolean isFinished() {
+        return done;
     }
 }

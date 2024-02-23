@@ -25,7 +25,7 @@ public class Constants {
         public static final int left_Front_Motor_ID = 3;
         public static final int left_Back_Motor_ID = 4;
         public static final double WheelCircumferenceInches = 6 * Math.PI;
-        public static final double EncoderConversionFactor = 1.0/8.5 * WheelCircumferenceInches;
+        public static final double EncoderConversionFactor = WheelCircumferenceInches / 42;
         public static final int right_Front_Motor_ID = 9;
         public static final int right_Back_Motor_ID = 10; 
     }

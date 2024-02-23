@@ -85,7 +85,7 @@ public class TeleopCommand extends Command {
         }
         
         if (operator_controller.getLeftY() >= 0.05 || operator_controller.getLeftY() <= -0.05) {
-            m_climb.climb(operator_controller.getLeftY());
+            m_climb.climb(-operator_controller.getLeftY());
         } else {
             m_climb.climb(0);
         }

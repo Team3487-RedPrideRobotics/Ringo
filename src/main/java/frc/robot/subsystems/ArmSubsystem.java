@@ -24,7 +24,7 @@ public class ArmSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        Constants.shootEdits.shootSpeed = frc.robot.NTManager.shootSpeedSub.get();
+        Constants.armEdits.armSpeed = frc.robot.NTManager.armSpeedSub.get();
     }
 
     public void armMotors(double speed){
