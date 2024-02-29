@@ -17,16 +17,23 @@ import frc.robot.Constants.shootConstants;
 import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
 
+import edu.wpi.first.math.system.plant.DCMotor;
+import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShootSubsystem extends SubsystemBase {
-    private CANSparkMax leftShootMotor;
-    private CANSparkMax rightShootMotor;
+    public CANSparkMax leftShootMotor;
+    public CANSparkMax rightShootMotor;
+    private DCMotor dcMotor;
+    private FlywheelSim flywheelSim;
 
     //TODO motor ids should probably be arguments passed to the constructor
     public ShootSubsystem() {
         leftShootMotor = new CANSparkMax(shootConstants.left_Shoot_Motor_ID, CANSparkLowLevel.MotorType.kBrushless);
         rightShootMotor = new CANSparkMax(shootConstants.right_Shoot_Motor_ID, CANSparkLowLevel.MotorType.kBrushless);
+        dcMotor = new DCMotor(12, 0.0000000026, 150, 1.8, 594.39, 2);
+        flywheelSim = new FlywheelSim(dcMotor, 1, 1);
+
     }
 
     @Override
@@ -37,11 +44,13 @@ public class ShootSubsystem extends SubsystemBase {
 
     @Override
     public void simulationPeriodic() {
+        
     }
 
     public void shoot(double speed){
         leftShootMotor.set(speed);
         rightShootMotor.set(-speed);
+        flywheelSim.setInput(speed);
     }
 
 }
