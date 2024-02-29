@@ -55,18 +55,16 @@ public class RobotContainer {
 
   //Auto Choosing
   private final SendableChooser<Command> autoChooser;
-  private final Command m_crossLineAuto = new AutoDriveStraight(m_drive, 40, .5);
+  //private final Command m_crossLineAuto = new AutoDriveStraight(m_drive, -40, .5);
   //private final Command m_shootSpeakerAuto = new AutoShoot(m_shoot, 0.5).andThen(m_crossLineAuto);
-  private final Command m_testAuto = new AutoDriveStraight(m_drive, -50, 0.3);
   
   private RobotContainer() {
+    NTManager.initialize();
     autoChooser = new SendableChooser<Command>();
-    autoChooser.setDefaultOption("Cross Line", m_crossLineAuto);
+    autoChooser.setDefaultOption("Cross Line", new AutoDriveStraight(m_drive, -40, .5));
     //autoChooser.addOption("Shoot Speaker Auto", m_shootSpeakerAuto);
-    autoChooser.addOption("Test Auto", m_testAuto);
     Shuffleboard.getTab("Autonomous").add(autoChooser);
     configureButtonBindings();
-    NTManager.initialize();
   }
   
   public static RobotContainer getInstance() {
@@ -79,12 +77,14 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     m_drive.resetEncoders();
     m_arm.resetEncoder();
-    //return new AutoShoot(m_shoot, m_intake, 1, 1);
+    //return new AutoShoot(m_shoot, 1);
     //return new AutoIntake(m_intake, 0.2);
     //return new AutoDrive(m_drive, 0.3, 50);
     //return new AutoTurn(m_drive, 20, 0.3);
-    return new AutoDriveStraight(m_drive, 10, 0.3); 
+    //return new AutoDriveStraight(m_drive, 10, 0.3); 
     //return autoChooser.getSelected();
+    //return new AutoDriveStraight(m_drive, -40, .5);
+    return new AutoShoot(m_shoot, 0.5).andThen(new AutoDriveStraight(m_drive, -40, 0.5));
   }
   
   public TeleopCommand getTeleopCommand() {

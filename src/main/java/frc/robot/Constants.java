@@ -25,7 +25,7 @@ public class Constants {
         public static final int left_Front_Motor_ID = 3;
         public static final int left_Back_Motor_ID = 4;
         public static final double WheelCircumferenceInches = 6 * Math.PI;
-        public static final double EncoderConversionFactor = WheelCircumferenceInches / 42;
+        public static final double EncoderConversionFactor = 1.0/8.5 * WheelCircumferenceInches;
         public static final int right_Front_Motor_ID = 9;
         public static final int right_Back_Motor_ID = 10; 
     }
@@ -65,12 +65,15 @@ public class Constants {
     }
 
     public static final class armEdits{
-        public static double armSpeed = 0.5;
+        public static double armSpeed = 0.4;
+        public static double arm_speed_multiplier ;
     }
 
     public static final class armConstants{
         public static final int left_Arm_Motor_ID = 5;
         public static final int right_Arm_Motor_ID = 8;
+        public static final double stop_distance = 5;
+        public static final double distance_from_stop = 0.75;
     }
 }
 
