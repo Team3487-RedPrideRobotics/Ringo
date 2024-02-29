@@ -44,7 +44,7 @@ public class AutoShoot extends AutonomousCommand {
         
         flywheelSim.setInput(-1);
 
-        _shoot.shoot(-1);
+        //_shoot.shoot(-1);
     }
 
 
