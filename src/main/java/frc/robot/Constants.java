@@ -11,6 +11,11 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.numbers.N2;
+import edu.wpi.first.math.system.LinearSystem;
+import edu.wpi.first.math.system.plant.DCMotor;
+import edu.wpi.first.math.system.plant.LinearSystemId;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -28,6 +33,31 @@ public class Constants {
         public static final double EncoderConversionFactor = 1.0/8.5 * WheelCircumferenceInches;
         public static final int right_Front_Motor_ID = 9;
         public static final int right_Back_Motor_ID = 10; 
+
+        //simulation values
+
+        // TODO need to characterize, these values are wrong
+        public static final double kvVoltSecondsPerMeter = 1.98;
+        public static final double kaVoltSecondsSquaredPerMeter = 0.2;
+        public static final double kvVoltSecondsPerRadian = 1.5;
+        public static final double kaVoltSecondsSquaredPerRadian = 0.3;
+
+        //maybe right, i might suck at measuring
+        public static final double kTrackwidthMeters = 0.7112;
+        public static final double kWheelDiameterMeters = 0.1524;
+
+
+        public static final LinearSystem<N2, N2, N2> kDrivetrainPlant =
+        LinearSystemId.identifyDrivetrainSystem(
+            kvVoltSecondsPerMeter,
+            kaVoltSecondsSquaredPerMeter,
+            kvVoltSecondsPerRadian,
+            kaVoltSecondsSquaredPerRadian);
+
+        //TODO make sure this is actually the right motor
+        public static final DCMotor kDriveGearbox = DCMotor.getNeo550(2);
+        
+        public static final double kDriveGearing = 8.45;
     }
 
     public static final class DriveEdits {

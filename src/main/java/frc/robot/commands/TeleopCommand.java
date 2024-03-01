@@ -70,7 +70,6 @@ public class TeleopCommand extends Command {
         } else {
             m_intake.intake(0);
         }
-        System.out.println("wow it runs tele");
         //endregion
         
         //region Setup operator controls
