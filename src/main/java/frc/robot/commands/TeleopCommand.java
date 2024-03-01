@@ -68,11 +68,19 @@ public class TeleopCommand extends Command {
             m_drive.arcadeDrive(0, 0);
         }
         
-
+        /* 
         if ( m_color.getProximity() >=2009 || (m_color.getProximity() <=2009 && operator_controller.getRightTriggerAxis() >= 0.05 ) ) {
            if (drive_controller.getRightTriggerAxis() >= 0.05) {
                 m_intake.intake(intakeEdits.intakeSpeed);
            } 
+        }
+        */
+        if (drive_controller.getRightTriggerAxis() >= 0.05) {
+            m_intake.intake(intakeEdits.intakeSpeed);
+        }else if(drive_controller.getLeftTriggerAxis() >= 0.05){
+            m_intake.intake(-intakeEdits.intakeSpeed);
+        }else {
+            m_intake.intake(0);
         }
         
         //endregion
@@ -83,7 +91,8 @@ public class TeleopCommand extends Command {
         } else if(operator_controller.getLeftTriggerAxis() >= 0.05) {
             m_shoot.shoot(shootEdits.shootSpeed);
         } else if(operator_controller.getRightBumper()){
-            m_shoot.shoot(shootEdits.slowShootSpeed);
+            m_shoot.shoot(-shootEdits.slowShootSpeed);
+            m_intake.intake(intakeEdits.intakeSpeed);
         } else {
             m_shoot.shoot(0);
         }
