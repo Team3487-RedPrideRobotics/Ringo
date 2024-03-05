@@ -57,6 +57,7 @@ public class RobotContainer {
   //Auto Choosing
   private final SendableChooser<Command> autoChooser;
   private final Command m_middleLaneAuto = new AutoShoot(m_shoot, 30).andThen(new AutoDriveStraight(m_drive, -40, 0.5));
+  private final Command m_3_rightLandAuto = new WaitCommand(3).andThen(new AutoDriveStraight(m_drive, -30, 0.4)).andThen(new AutoTurn(m_drive, -100, 0.4)).andThen(new AutoShoot(m_shoot, 30)).andThen(new AutoTurn(m_drive, -90, 0.4)).andThen(new AutoDriveStraight(m_drive, -50, 0.4)).andThen(new AutoTurn(m_drive, -90,0.4)).andThen(new AutoDriveStraight(m_drive, 50, 0.4));
   //private final Command m_crossLineAuto = new AutoDriveStraight(m_drive, -40, .5);
   //private final Command m_shootSpeakerAuto = new AutoShoot(m_shoot, 0.5).andThen(m_crossLineAuto);
   
@@ -84,7 +85,7 @@ public class RobotContainer {
     //return m_middleLaneAuto;
 
     //going for right lane, current plan is to wait 5 seconds then go into middle lane and shoot.
-    return new AutoDriveStraight(m_drive, -30, 0.4).andThen(new AutoTurn(m_drive, -90, 0.4)).andThen(m_middleLaneAuto);
+    return new AutoDriveStraight(m_drive, 50, 0.6);
   }
   
   public TeleopCommand getTeleopCommand() {
