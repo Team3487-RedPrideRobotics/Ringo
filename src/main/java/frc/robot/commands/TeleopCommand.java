@@ -90,12 +90,12 @@ public class TeleopCommand extends Command {
             m_shoot.shoot(-shootEdits.shootSpeed);
         } else if(operator_controller.getLeftTriggerAxis() >= 0.05) {
             m_shoot.shoot(shootEdits.shootSpeed);
-        } else if(operator_controller.getRightBumper()){
-            m_shoot.shoot(-shootEdits.slowShootSpeed);
+        } else if(operator_controller.getRightBumperPressed()){
+            m_shoot.shoot(-1);
             m_intake.intake(intakeEdits.intakeSpeed);
         } else {
             m_shoot.shoot(0);
-        }
+        }     
         
         if (operator_controller.getLeftY() >= 0.05 || operator_controller.getLeftY() <= -0.05) {
             m_climb.climb(operator_controller.getLeftY());
