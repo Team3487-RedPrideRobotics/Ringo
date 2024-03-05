@@ -5,12 +5,14 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class ArmSubsystem {
+public class ArmSubsystem extends SubsystemBase {
     
     private CANSparkMax leftArmMotor;
     private CANSparkMax rightArmMotor;
+    private RelativeEncoder armEncoder;
 
     private RelativeEncoder armEncoder; 
 
@@ -22,6 +24,12 @@ public class ArmSubsystem {
 
         armEncoder = rightArmMotor.getEncoder();
 
+        armEncoder = leftArmMotor.getEncoder();
+    }
+
+    @Override
+    public void periodic() {
+        Constants.shootEdits.shootSpeed = frc.robot.NTManager.shootSpeedSub.get();
     }
 
     public void armMotors(double speed){
@@ -47,4 +55,11 @@ public class ArmSubsystem {
 
     
       }
+    public double getPosition(){
+        return armEncoder.getPosition();
+    }
+
+    public void resetEncoder(){
+        armEncoder.setPosition(0);
+    }
 }

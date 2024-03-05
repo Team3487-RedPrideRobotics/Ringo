@@ -32,6 +32,7 @@ public class ShootSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
         Constants.shootEdits.shootSpeed = frc.robot.NTManager.shootSpeedSub.get();
+        Constants.shootEdits.slowShootSpeed = frc.robot.NTManager.slowShootSpeedSub.get();
     }
 
     @Override

@@ -13,6 +13,7 @@
 package frc.robot;
 
 import frc.robot.commands.*;
+import frc.robot.commands.Autonomoose.AutoDrive;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.XboxController;
 
@@ -39,9 +40,10 @@ public class RobotContainer {
   public final DriveSubsystem m_drive = new DriveSubsystem();
   public final CameraSubsystem m_camera = new CameraSubsystem();
   public final ArmSubsystem m_arm = new ArmSubsystem();
+  public final ColorSensorSubsystem m_color = new ColorSensorSubsystem();
   
   public final AutonomousCommand m_auto = new AutonomousCommand();
-  public final TeleopCommand m_TeleopCommand = new TeleopCommand(m_drive, m_intake, m_climb, m_shoot, m_camera, m_arm);
+  public final TeleopCommand m_TeleopCommand = new TeleopCommand(m_drive, m_intake, m_climb, m_shoot, m_camera, m_arm, m_color);
   
   // Joysticks
   private final XboxController m_driveController = new XboxController(1);
@@ -60,7 +62,10 @@ public class RobotContainer {
   }
   
   public Command getAutonomousCommand() {
-    return m_auto;
+    //return new AutoDrive(m_drivetrain, 50, 0.5)
+    m_drive.resetEncoders();
+    m_arm.resetEncoder();
+    return new AutoDrive(m_drive, 180, 0.2, 0);
   }
   
   public TeleopCommand getTeleopCommand() {

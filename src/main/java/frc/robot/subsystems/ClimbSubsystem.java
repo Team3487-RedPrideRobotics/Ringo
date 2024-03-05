@@ -19,7 +19,9 @@ public class ClimbSubsystem extends SubsystemBase {
     public ClimbSubsystem() {
         //TODO motor ids should probably be passed in as arguments
         leftClimbMotor = new CANSparkMax(climbConstants.left_Climb_Motor_ID, CANSparkLowLevel.MotorType.kBrushless);
+        leftClimbMotor.setInverted(true);
         rightClimbMotor = new CANSparkMax(climbConstants.right_Climb_Motor_ID, CANSparkLowLevel.MotorType.kBrushless);
+        rightClimbMotor.setInverted(false);
 
         topClimbSwitch = new DigitalInput(Constants.climbConstants.top_Climb_Switch_ID);
         bottomClimbSwitch = new DigitalInput(Constants.climbConstants.bottom_Climb_Switch_ID);
@@ -36,7 +38,7 @@ public class ClimbSubsystem extends SubsystemBase {
     
     public void climb(double speed) {
         leftClimbMotor.set(speed * climbEdits.climbSpeed);
-        rightClimbMotor.set(speed * climbEdits.climbSpeed * -1);
+        rightClimbMotor.set(speed * climbEdits.climbSpeed);
     }
 
     public boolean topClimbSwitch(){
