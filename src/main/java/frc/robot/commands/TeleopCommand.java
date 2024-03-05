@@ -1,16 +1,16 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.RobotContainer;
-import frc.robot.Constants.DriveEdits;
 import frc.robot.Constants.intakeEdits;
 import frc.robot.Constants.shootEdits;
+import frc.robot.RobotContainer;
+import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.subsystems.ColorSensorSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
-import frc.robot.subsystems.ArmSubsystem;
-import frc.robot.subsystems.CameraSubsystem;
 
 public class TeleopCommand extends Command {
     private DriveSubsystem m_drive;
@@ -19,11 +19,13 @@ public class TeleopCommand extends Command {
     private ShootSubsystem m_shoot;
     private CameraSubsystem m_camera;
     private ArmSubsystem m_arm;
+    private ColorSensorSubsystem m_color;
     
     private XboxController drive_controller;
     private XboxController operator_controller;
     
-    public TeleopCommand(DriveSubsystem drive, IntakeSubsystem intake, ClimbSubsystem climb, ShootSubsystem shoot, CameraSubsystem camera, ArmSubsystem arm) {
+    public TeleopCommand(DriveSubsystem drive, IntakeSubsystem intake, ClimbSubsystem climb, ShootSubsystem shoot,
+     CameraSubsystem camera, ArmSubsystem arm, ColorSensorSubsystem color) {
         
         m_drive = drive;
         addRequirements(m_drive);
@@ -41,6 +43,9 @@ public class TeleopCommand extends Command {
         addRequirements(m_camera);
 
         m_arm = arm;
+
+        m_color = color;
+        addRequirements(m_color);
     }
     
     @Override
@@ -63,11 +68,18 @@ public class TeleopCommand extends Command {
             m_drive.arcadeDrive(0, 0);
         }
         
+        /* 
+        if ( m_color.getProximity() >=2009 || (m_color.getProximity() <=2009 && operator_controller.getRightTriggerAxis() >= 0.05 ) ) {
+           if (drive_controller.getRightTriggerAxis() >= 0.05) {
+                m_intake.intake(intakeEdits.intakeSpeed);
+           } 
+        }
+        */
         if (drive_controller.getRightTriggerAxis() >= 0.05) {
-            m_intake.intake(drive_controller.getRightTriggerAxis());
-        } else if (drive_controller.getLeftTriggerAxis() >= 0.05){
-            m_intake.intake(-drive_controller.getLeftTriggerAxis());
-        } else {
+            m_intake.intake(intakeEdits.intakeSpeed);
+        }else if(drive_controller.getLeftTriggerAxis() >= 0.05){
+            m_intake.intake(-intakeEdits.intakeSpeed);
+        }else {
             m_intake.intake(0);
         }
         
@@ -78,11 +90,12 @@ public class TeleopCommand extends Command {
             m_shoot.shoot(-shootEdits.shootSpeed);
         } else if(operator_controller.getLeftTriggerAxis() >= 0.05) {
             m_shoot.shoot(shootEdits.shootSpeed);
-        } else if(operator_controller.getRightBumper()){
-            m_shoot.shoot(shootEdits.slowShootSpeed);
+        } else if(operator_controller.getRightBumperPressed()){
+            m_shoot.shoot(-1);
+            m_intake.intake(intakeEdits.intakeSpeed);
         } else {
             m_shoot.shoot(0);
-        }
+        }     
         
         if (operator_controller.getLeftY() >= 0.05 || operator_controller.getLeftY() <= -0.05) {
             m_climb.climb(-operator_controller.getLeftY());
