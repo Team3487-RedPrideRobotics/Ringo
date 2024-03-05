@@ -13,7 +13,6 @@
 package frc.robot;
 
 import frc.robot.commands.*;
-import frc.robot.commands.Autonomoose.AutoDrive;
 import frc.robot.commands.Autonomoose.AutoDriveStraight;
 import frc.robot.commands.Autonomoose.AutoIntake;
 import frc.robot.commands.Autonomoose.AutoShoot;
@@ -55,6 +54,7 @@ public class RobotContainer {
 
   //Auto Choosing
   private final SendableChooser<Command> autoChooser;
+  private final Command m_middleLaneAuto = new AutoShoot(m_shoot, 30).andThen(new AutoDriveStraight(m_drive, -40, 0.5));
   //private final Command m_crossLineAuto = new AutoDriveStraight(m_drive, -40, .5);
   //private final Command m_shootSpeakerAuto = new AutoShoot(m_shoot, 0.5).andThen(m_crossLineAuto);
   
@@ -77,14 +77,12 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     m_drive.resetEncoders();
     m_arm.resetEncoder();
-    //return new AutoShoot(m_shoot, 1);
-    //return new AutoIntake(m_intake, 0.2);
-    //return new AutoDrive(m_drive, 0.3, 50);
-    //return new AutoTurn(m_drive, 20, 0.3);
-    //return new AutoDriveStraight(m_drive, 10, 0.3); 
-    //return autoChooser.getSelected();
-    //return new AutoDriveStraight(m_drive, -40, .5);
-    return new AutoShoot(m_shoot, 0.5).andThen(new AutoDriveStraight(m_drive, -40, 0.5));
+
+    //middle lane, it works
+    //return m_middleLaneAuto;
+
+    //going for right lane, current plan is to wait 5 seconds then go into middle lane and shoot.
+    return new AutoDriveStraight(m_drive, -30, 0.4).andThen(new AutoTurn(m_drive, -90, 0.4)).andThen(m_middleLaneAuto);
   }
   
   public TeleopCommand getTeleopCommand() {

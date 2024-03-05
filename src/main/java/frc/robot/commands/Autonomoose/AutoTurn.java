@@ -18,11 +18,12 @@ public class AutoTurn extends AutonomousCommand {
         // need one or two more degrees in turnig ratiooss
         _turning_distance = _degree / 360 * 22 * Math.PI;
         // 22PI is circumference of rbobobtobot
+        m_drive.resetEncoders();
     }
     // multiply encoder values by wheel circumference????
      @Override
     public void execute() {
-    System.out.println("Left Encoder:" + m_drive.getLeftDriveEncoder());
+    System.out.println("Turning distance:" + _turning_distance + ", Encoder:" + m_drive.getLeftDriveEncoder());
         if(_turning_distance >= 0){
             if(-m_drive.getLeftDriveEncoder() >= _turning_distance ){
                 m_drive.tankDrive(0, 0);

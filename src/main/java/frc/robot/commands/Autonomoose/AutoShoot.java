@@ -1,33 +1,29 @@
 package frc.robot.commands.Autonomoose;
-import edu.wpi.first.wpilibj.Timer;
 import frc.robot.commands.AutonomousCommand;
-import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
 
 public class AutoShoot extends AutonomousCommand {
-    private Timer timer;
     private ShootSubsystem _shoot;
     private double _waitTime;
     private boolean done;
+    private int counter;
 
     public AutoShoot(ShootSubsystem shoo, double waitTime){
         _shoot = shoo;
         _waitTime = waitTime;
-        timer.start();
         done = false;
+        counter = 0;
     }
 
     @Override
     public void execute(){
-         
-        if (timer.get() < _waitTime) {
-            _shoot.shoot(1);    
-        } else {
-            _shoot.shoot(0);
+        counter++;
+        if(counter >= _waitTime){
             done = true;
+            _shoot.shoot(0);
+        } else {
+            _shoot.shoot(-1);
         }
-        
-        //_shoot.shoot(-1);
     }
 
     @Override
