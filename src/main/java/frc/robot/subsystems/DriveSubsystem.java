@@ -50,7 +50,7 @@ public class DriveSubsystem extends SubsystemBase {
         drive.setMaxOutput(1.0);
 
         leftEncoder = left_Front_Motor.getEncoder();
-        leftEncoder .setPositionConversionFactor(Constants.DriveConstants.EncoderConversionFactor);
+        leftEncoder.setPositionConversionFactor(Constants.DriveConstants.EncoderConversionFactor);
         rightEncoder = right_Front_Motor.getEncoder();
         rightEncoder.setPositionConversionFactor(Constants.DriveConstants.EncoderConversionFactor);
     }

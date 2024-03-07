@@ -26,32 +26,30 @@ public class ArmSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
         Constants.shootEdits.shootSpeed = frc.robot.NTManager.shootSpeedSub.get();
+        System.out.println(getPosition());
     }
 
-    public void armMotors(double speed){
+    public void setMotorSpeed(double speed){
         leftArmMotor.set(speed);
         rightArmMotor.set(speed);
     }
 
     public void goToAngle(double arm, double limit, double armkP){
-        double delta_angle = armEncoder.getPosition() - arm;
+        double armDelta = arm - armEncoder.getPosition();
+        System.out.println("arm difference: " + armDelta);
         
 
-        if(Math.abs(delta_angle) >= Constants.armEdits.AngleThreshold){
-          armMotors(-1*Math.signum(delta_angle) * Math.abs(delta_angle*armkP));
-          System.out.println(-1*Math.signum(delta_angle) * Math.abs(delta_angle*armkP));
-        }else{
-          armMotors(0);
+        if(Math.abs(armDelta) >= Constants.armEdits.AngleThreshold){
+          var motorSpeed = -armDelta*armkP;
+          motorSpeed = Math.abs(motorSpeed) > limit ? limit * Math.signum(motorSpeed) : motorSpeed;
+          System.out.println("motor speed: " + motorSpeed);
+          setMotorSpeed(motorSpeed);
+        } else {
+          setMotorSpeed(0);
         }
-    
-        if(Math.abs(leftArmMotor.get()) >= limit){
-          armMotors(limit * Math.signum(leftArmMotor.get()));
-        }
-    
-        
-
     
       }
+
     public double getPosition(){
         return armEncoder.getPosition();
     }
@@ -59,4 +57,4 @@ public class ArmSubsystem extends SubsystemBase {
     public void resetEncoder(){
         armEncoder.setPosition(0);
     }
-}
+  }

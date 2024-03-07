@@ -59,12 +59,13 @@ public class TeleopCommand extends Command {
     @Override
     public void execute() {
         //region Setup driver controls
-        if (drive_controller.getLeftY() >= 0.25 ||
-                drive_controller.getLeftY() <= -0.25 ||
-                drive_controller.getRightX() >= 0.25 ||
-                drive_controller.getRightX() <= -0.25
+        if (drive_controller.getLeftY() >= 0.05 ||
+                drive_controller.getLeftY() <= -0.05 ||
+                drive_controller.getRightX() >= 0.05 ||
+                drive_controller.getRightX() <= -0.05
         ) {
             m_drive.arcadeDrive(drive_controller.getLeftY(), drive_controller.getRightX());
+            System.out.println("Left: " + drive_controller.getLeftY() + " Right: " + drive_controller.getRightY());
         }
         else {
             m_drive.arcadeDrive(0, 0);
@@ -106,12 +107,16 @@ public class TeleopCommand extends Command {
         }
 
         if (operator_controller.getRightY() >= 0.05 || operator_controller.getRightY() <= -0.05){
-            m_arm.armMotors(operator_controller.getRightY());
+            m_arm.setMotorSpeed(operator_controller.getRightY());
         } else{
-            m_arm.armMotors(0);
+            m_arm.setMotorSpeed(0);
         }
         if(operator_controller.getYButton()){
-            m_arm.goToAngle(0.5, 7, armEdits.armKP);
+            m_arm.goToAngle(0.7, 0.6, armEdits.armKP);
+        }
+        if(operator_controller.getAButton()){
+            m_arm.resetEncoder();
+            m_drive.resetEncoders();   
         }
         //endregion
     }
