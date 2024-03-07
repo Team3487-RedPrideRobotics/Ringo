@@ -1,7 +1,10 @@
 package frc.robot.subsystems;
 
+import org.opencv.video.Video;
+
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.cscore.VideoMode;
 import edu.wpi.first.cscore.VideoSink;
 import edu.wpi.first.cscore.VideoSource.ConnectionStrategy;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -15,25 +18,13 @@ public class CameraSubsystem extends SubsystemBase {
     
     public CameraSubsystem() {
         camera1 = CameraServer.startAutomaticCapture(0);
-        camera2 = CameraServer.startAutomaticCapture(1);
         
-        server = CameraServer.addSwitchedCamera("Switch Camera");
-        
-        camera1.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
-        camera2.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
-        
-        camera1Active = true;
-    }
-    
-    public void Switch() {
-        if (camera1Active) {
-            server.setSource(camera2);
-            camera1Active = false;
-        }
-        else {
-            server.setSource(camera1);
-            camera1Active = true;
-        }
+        camera1.setFPS(30);
+        camera1.setResolution(1152 , 648);
+        System.out.println(camera1.getVideoMode());
+        //VideoMode.PixelFormat.kMJPEG
+
+
     }
 }
    

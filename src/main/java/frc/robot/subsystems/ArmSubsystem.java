@@ -12,8 +12,6 @@ public class ArmSubsystem extends SubsystemBase {
     
     private CANSparkMax leftArmMotor;
     private CANSparkMax rightArmMotor;
-    private RelativeEncoder armEncoder;
-
     private RelativeEncoder armEncoder; 
 
     public ArmSubsystem(){
@@ -23,8 +21,6 @@ public class ArmSubsystem extends SubsystemBase {
         rightArmMotor = new CANSparkMax(Constants.armConstants.right_Arm_Motor_ID, CANSparkLowLevel.MotorType.kBrushless);
 
         armEncoder = rightArmMotor.getEncoder();
-
-        armEncoder = leftArmMotor.getEncoder();
     }
 
     @Override
@@ -43,12 +39,13 @@ public class ArmSubsystem extends SubsystemBase {
 
         if(Math.abs(delta_angle) >= Constants.armEdits.AngleThreshold){
           armMotors(-1*Math.signum(delta_angle) * Math.abs(delta_angle*armkP));
+          System.out.println(-1*Math.signum(delta_angle) * Math.abs(delta_angle*armkP));
         }else{
-          arm.set(0);
+          armMotors(0);
         }
     
-        if(Math.abs(arm.get()) >= limit){
-          arm.set(limit * Math.signum(arm.get()));
+        if(Math.abs(leftArmMotor.get()) >= limit){
+          armMotors(limit * Math.signum(leftArmMotor.get()));
         }
     
         
