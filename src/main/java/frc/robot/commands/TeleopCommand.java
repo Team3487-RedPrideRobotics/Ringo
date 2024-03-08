@@ -65,7 +65,6 @@ public class TeleopCommand extends Command {
                 drive_controller.getRightX() <= -0.05
         ) {
             m_drive.arcadeDrive(drive_controller.getLeftY(), drive_controller.getRightX());
-            System.out.println("Left: " + drive_controller.getLeftY() + " Right: " + drive_controller.getRightY());
         }
         else {
             m_drive.arcadeDrive(0, 0);
@@ -112,9 +111,12 @@ public class TeleopCommand extends Command {
             m_arm.setMotorSpeed(0);
         }
         if(operator_controller.getYButton()){
-            m_arm.goToAngle(0.7, 0.6, armEdits.armKP);
+            m_arm.goToAngle(34, 0.6, armEdits.armKP);
         }
         if(operator_controller.getAButton()){
+            m_arm.goToAngle(-39, 0.4, armEdits.armKP);
+        }
+        if(operator_controller.getBButton()){
             m_arm.resetEncoder();
             m_drive.resetEncoders();   
         }

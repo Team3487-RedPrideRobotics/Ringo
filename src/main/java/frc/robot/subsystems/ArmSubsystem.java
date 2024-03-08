@@ -38,8 +38,9 @@ public class ArmSubsystem extends SubsystemBase {
         double armDelta = arm - armEncoder.getPosition();
         System.out.println("arm difference: " + armDelta);
         
-
-        if(Math.abs(armDelta) >= Constants.armEdits.AngleThreshold){
+        if(-armEncoder.getPosition() >= arm){
+          setMotorSpeed(0);
+        } else if(Math.abs(armDelta) >= Constants.armEdits.AngleThreshold){
           var motorSpeed = -armDelta*armkP;
           motorSpeed = Math.abs(motorSpeed) > limit ? limit * Math.signum(motorSpeed) : motorSpeed;
           System.out.println("motor speed: " + motorSpeed);
