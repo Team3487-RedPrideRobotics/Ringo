@@ -23,10 +23,10 @@ import frc.robot.Constants;
 
 public class DriveSubsystem extends SubsystemBase {
     
-    private CANSparkMax left_Back_Motor;
-    private CANSparkMax left_Front_Motor;
-    private CANSparkMax right_Back_Motor;
-    private CANSparkMax right_Front_Motor;
+    public CANSparkMax left_Back_Motor;
+    public CANSparkMax left_Front_Motor;
+    public CANSparkMax right_Back_Motor;
+    public CANSparkMax right_Front_Motor;
     private RelativeEncoder leftEncoder;
     private RelativeEncoder rightEncoder;
     private DifferentialDrive drive;
@@ -68,6 +68,12 @@ public class DriveSubsystem extends SubsystemBase {
     
     public void arcadeDrive(double speed, double turning) {
         drive.arcadeDrive(speed * Constants.DriveEdits.DriveSpeed, turning * Constants.DriveEdits.TurnSpeed);
+    }
+    public void leftDriveSpeed(double speed){
+        left_Front_Motor.set(speed * Constants.DriveEdits.DriveSpeed);
+    }
+    public void rightDriveSpeed(double speed){
+        right_Front_Motor.set(speed * Constants.DriveEdits.DriveSpeed);
     }
 
     public double getLeftDriveEncoder(){

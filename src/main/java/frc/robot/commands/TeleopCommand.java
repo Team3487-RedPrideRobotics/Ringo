@@ -57,24 +57,19 @@ public class TeleopCommand extends Command {
     @Override
     public void execute() {
         //region Setup driver controls
-        if (drive_controller.getLeftY() >= 0.25 ||
-                drive_controller.getLeftY() <= -0.25 ||
-                drive_controller.getRightX() >= 0.25 ||
-                drive_controller.getRightX() <= -0.25
-        ) {
+        //This first if should only be true when the left Stick is forward and the right stick is not moving
+        if(drive_controller.getLeftY() >= 0.05 
+        && drive_controller.getRightX() <= 0.05 
+        && drive_controller.getRightX() >= -0.05){
+            m_drive.rightDriveSpeed(drive_controller.getRightX());
+            double rightVoltage = m_drive.right_Front_Motor.getBusVoltage();
+            m_drive.left_Front_Motor.setVoltage(rightVoltage * 1.05); //idk what this number should be yet
+        } else if(drive_controller.getLeftY() <= 0.05 
+        || drive_controller.getRightX() >= 0.05 
+        || drive_controller.getRightX() <= -0.05){
             m_drive.arcadeDrive(drive_controller.getLeftY(), drive_controller.getRightX());
         }
-        else {
-            m_drive.arcadeDrive(0, 0);
-        }
-        
-        /* 
-        if ( m_color.getProximity() >=2009 || (m_color.getProximity() <=2009 && operator_controller.getRightTriggerAxis() >= 0.05 ) ) {
-           if (drive_controller.getRightTriggerAxis() >= 0.05) {
-                m_intake.intake(intakeEdits.intakeSpeed);
-           } 
-        }
-        */
+
         if (drive_controller.getRightTriggerAxis() >= 0.05) {
             m_intake.intake(intakeEdits.intakeSpeed);
         }else if(drive_controller.getLeftTriggerAxis() >= 0.05){
