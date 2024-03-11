@@ -65,9 +65,9 @@ public class Constants {
     }
 
     public static final class armEdits{
-        public static final double AngleThreshold = 1.75;//1.25
+        public static final double AngleThreshold = 15.5;//1.25
         public static final double armKP = 2.0/71*0.7;
-        public static double armSpeed = 0.5;
+        public static double armSpeed = 0.6;
     }
 
     public static final class armConstants{

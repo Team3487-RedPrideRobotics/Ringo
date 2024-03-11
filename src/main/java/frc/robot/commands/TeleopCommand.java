@@ -111,10 +111,10 @@ public class TeleopCommand extends Command {
             m_arm.setMotorSpeed(0);
         }
         if(operator_controller.getYButton()){
-            m_arm.goToAngle(34, 0.6, armEdits.armKP);
+            m_arm.goToAngle(-37, 0.6, armEdits.armKP, 15.5);
         }
         if(operator_controller.getAButton()){
-            m_arm.goToAngle(-39, 0.4, armEdits.armKP);
+            m_arm.goToAngle(0, 0.6, armEdits.armKP, 0);
         }
         if(operator_controller.getBButton()){
             m_arm.resetEncoder();
