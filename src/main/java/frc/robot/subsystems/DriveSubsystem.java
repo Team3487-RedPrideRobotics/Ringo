@@ -43,14 +43,13 @@ public class DriveSubsystem extends SubsystemBase {
         right_Front_Motor = new CANSparkMax(Constants.DriveConstants.right_Front_Motor_ID, CANSparkLowLevel.MotorType.kBrushless);
         
         right_Back_Motor.follow(right_Front_Motor);
-        
         drive = new DifferentialDrive(left_Front_Motor, right_Front_Motor);
         drive.setSafetyEnabled(true);
         drive.setExpiration(0.1);
         drive.setMaxOutput(1.0);
 
         leftEncoder = left_Front_Motor.getEncoder();
-        leftEncoder .setPositionConversionFactor(Constants.DriveConstants.EncoderConversionFactor);
+        leftEncoder.setPositionConversionFactor(Constants.DriveConstants.EncoderConversionFactor);
         rightEncoder = right_Front_Motor.getEncoder();
         rightEncoder.setPositionConversionFactor(Constants.DriveConstants.EncoderConversionFactor);
     }
@@ -68,6 +67,12 @@ public class DriveSubsystem extends SubsystemBase {
     
     public void arcadeDrive(double speed, double turning) {
         drive.arcadeDrive(speed * Constants.DriveEdits.DriveSpeed, turning * Constants.DriveEdits.TurnSpeed);
+        //System.out.println("Left: " + left_Front_Motor.getBusVoltage() + " Right: " + right_Front_Motor.getBusVoltage());
+
+    }
+
+    public void tankDrive(double left_speed, double right_speed){
+        drive.tankDrive(left_speed * Constants.DriveEdits.DriveSpeed, right_speed * Constants.DriveEdits.DriveSpeed);
     }
     public void leftDriveSpeed(double speed){
         left_Front_Motor.set(speed * Constants.DriveEdits.DriveSpeed);

@@ -1,34 +1,33 @@
 package frc.robot.commands.Autonomoose;
-
-import edu.wpi.first.units.Time;
-import edu.wpi.first.wpilibj.Timer;
 import frc.robot.commands.AutonomousCommand;
-import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShootSubsystem;
 
 public class AutoShoot extends AutonomousCommand {
-    private Timer timer;
     private ShootSubsystem _shoot;
-    private IntakeSubsystem _intake;
-    private double _intakeSpeed; 
     private double _waitTime;
+    private boolean done;
+    private int counter;
 
-    public AutoShoot(ShootSubsystem shoot, IntakeSubsystem intake, double intakeSpeed, double waitTime){
-        _shoot = shoot;
-        _intake = intake;
-        _intakeSpeed = intakeSpeed;
+    public AutoShoot(ShootSubsystem shoo, double waitTime){
+        _shoot = shoo;
         _waitTime = waitTime;
-        timer.start();
+        done = false;
+        counter = 0;
     }
 
     @Override
     public void execute(){
-        _shoot.shoot(1);
-        if(timer.get() >= _waitTime){
-            _intake.intake(_intakeSpeed);
-        } else if(timer.get() >= _waitTime + .5){
-           _shoot.shoot(0);
-           _intake.intake(0); 
+        counter++;
+        if(counter >= _waitTime){
+            done = true;
+            _shoot.shoot(0);
+        } else {
+            _shoot.shoot(-1);
         }
+    }
+
+    @Override
+    public boolean isFinished() {
+        return done;
     }
 }

@@ -17,9 +17,9 @@ public class AutoArm extends AutonomousCommand {
     @Override
     public void execute(){
         if(armSubsystem.getPosition() <= distance){
-            armSubsystem.armMotors(armSpeed);
+            armSubsystem.setMotorSpeed(armSpeed);
         } else {
-            armSubsystem.armMotors(0);
+            armSubsystem.setMotorSpeed(0);
         }
     }
 }
