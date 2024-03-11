@@ -24,16 +24,5 @@ public class CameraSubsystem extends SubsystemBase {
         
         camera1Active = true;
     }
-    
-    public void Switch() {
-        if (camera1Active) {
-            server.setSource(camera2);
-            camera1Active = false;
-        }
-        else {
-            server.setSource(camera1);
-            camera1Active = true;
-        }
-    }
 }
    

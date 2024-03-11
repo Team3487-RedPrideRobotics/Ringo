@@ -103,10 +103,6 @@ public class TeleopCommand extends Command {
             m_climb.climb(0);
         }
         
-        if (operator_controller.getAButtonPressed()) {
-            m_camera.Switch();
-        }
-
         if (operator_controller.getRightY() >= 0.05 || operator_controller.getRightY() <= -0.05){
             m_arm.armMotors(operator_controller.getRightY());
         } else{
