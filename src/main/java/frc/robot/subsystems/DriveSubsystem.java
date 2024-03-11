@@ -71,6 +71,10 @@ public class DriveSubsystem extends SubsystemBase {
 
     }
 
+    public void tankDrive(double left_speed, double right_speed){
+        drive.tankDrive(left_speed * Constants.DriveEdits.DriveSpeed, right_speed * Constants.DriveEdits.DriveSpeed);
+    }
+
     public double getLeftDriveEncoder(){
         return leftEncoder.getPosition();
     }

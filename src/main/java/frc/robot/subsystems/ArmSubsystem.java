@@ -7,6 +7,7 @@ import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Constants.armEdits;
 
 public class ArmSubsystem extends SubsystemBase {
     
@@ -25,12 +26,12 @@ public class ArmSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        Constants.shootEdits.shootSpeed = frc.robot.NTManager.shootSpeedSub.get();
+        Constants.armEdits.armSpeed = frc.robot.NTManager.armSpeedSub.get();
     }
 
-    public void setMotorSpeed(double speed){
-        leftArmMotor.set(speed * Constants.armEdits.armSpeed);
-        rightArmMotor.set(speed * Constants.armEdits.armSpeed);
+    public void armMotors(double speed){
+        leftArmMotor.set(speed * armEdits.armSpeed);
+        rightArmMotor.set(speed * armEdits.armSpeed);
     }
 
     public void goToAngle(double arm, double limit, double armkP, double threshold){
