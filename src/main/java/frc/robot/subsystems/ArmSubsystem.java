@@ -29,7 +29,7 @@ public class ArmSubsystem extends SubsystemBase {
         Constants.armEdits.armSpeed = frc.robot.NTManager.armSpeedSub.get();
     }
 
-    public void armMotors(double speed){
+    public void setMotorSpeed(double speed){
         leftArmMotor.set(speed * armEdits.armSpeed);
         rightArmMotor.set(speed * armEdits.armSpeed);
     }
