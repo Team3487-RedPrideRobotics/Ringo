@@ -63,8 +63,8 @@ public class NTManager {
 
         var armSpeedTopic = speedTable.getDoubleTopic("Arm Speed");
         armSpeedPub = armSpeedTopic.publish();
-        armSpeedPub.setDefault(Constants.shootEdits.shootSpeed);
-        armSpeedSub = armSpeedTopic.subscribe(Constants.shootEdits.shootSpeed);
+        armSpeedPub.setDefault(Constants.armEdits.armSpeed);
+        armSpeedSub = armSpeedTopic.subscribe(Constants.armEdits.armSpeed);
 
     }
 }

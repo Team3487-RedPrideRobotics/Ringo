@@ -65,7 +65,7 @@ public class Constants {
     }
 
     public static final class armEdits{
-        public static double armSpeed = 0.5;
+        public static double armSpeed = 0.1;
     }
 
     public static final class armConstants{
