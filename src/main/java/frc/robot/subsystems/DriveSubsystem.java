@@ -50,7 +50,7 @@ public class DriveSubsystem extends SubsystemBase {
         drive.setMaxOutput(1.0);
 
         leftEncoder = left_Front_Motor.getEncoder();
-        leftEncoder .setPositionConversionFactor(Constants.DriveConstants.EncoderConversionFactor);
+        leftEncoder.setPositionConversionFactor(Constants.DriveConstants.EncoderConversionFactor);
         rightEncoder = right_Front_Motor.getEncoder();
         rightEncoder.setPositionConversionFactor(Constants.DriveConstants.EncoderConversionFactor);
     }
@@ -68,6 +68,10 @@ public class DriveSubsystem extends SubsystemBase {
     
     public void arcadeDrive(double speed, double turning) {
         drive.arcadeDrive(speed * Constants.DriveEdits.DriveSpeed, turning * Constants.DriveEdits.TurnSpeed);
+    }
+
+    public void tankDrive(double left_speed, double right_speed){
+        drive.tankDrive(left_speed * Constants.DriveEdits.DriveSpeed, right_speed * Constants.DriveEdits.DriveSpeed);
     }
 
     public double getLeftDriveEncoder(){
