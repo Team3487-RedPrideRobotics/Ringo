@@ -23,13 +23,13 @@ public class AutoTurn extends AutonomousCommand {
     // multiply encoder values by wheel circumference????
      @Override
     public void execute() {
-    System.out.println("Turning distance:" + _turning_distance + ", Encoder:" + m_drive.getLeftDriveEncoder());
         if(_turning_distance >= 0){
-            if(-m_drive.getLeftDriveEncoder() >= _turning_distance ){
+            if(m_drive.getLeftDriveEncoder() >= _turning_distance ){
                 m_drive.tankDrive(0, 0);
                 done = true;
             }else{
                 m_drive.tankDrive(_drive_speed,-_drive_speed);
+                System.out.println(m_drive.getLeftDriveEncoder() + " >= " + _turning_distance);
             }
         }else{
             if(m_drive.getLeftDriveEncoder() <= _turning_distance){
@@ -37,6 +37,7 @@ public class AutoTurn extends AutonomousCommand {
                 done = true;
             }else{
                 m_drive.tankDrive(-_drive_speed,_drive_speed);
+                System.out.println("bottom");
             }
         }
         
