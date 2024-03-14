@@ -12,6 +12,8 @@
 
 package frc.robot.subsystems;
 
+
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -27,6 +29,8 @@ public class DriveSubsystem extends SubsystemBase {
     public CANSparkMax left_Front_Motor;
     public CANSparkMax right_Back_Motor;
     public CANSparkMax right_Front_Motor;
+    public boolean justEnteredCurvature;
+    private AHRS navx; 
     private RelativeEncoder leftEncoder;
     private RelativeEncoder rightEncoder;
     private DifferentialDrive drive;
@@ -68,7 +72,15 @@ public class DriveSubsystem extends SubsystemBase {
     public void arcadeDrive(double speed, double turning) {
         drive.arcadeDrive(speed * Constants.DriveEdits.DriveSpeed, turning * Constants.DriveEdits.TurnSpeed);
         //System.out.println("Left: " + left_Front_Motor.getBusVoltage() + " Right: " + right_Front_Motor.getBusVoltage());
-
+        //robotdrive.drive(SPEED, Gyro.getAngle() * .03)
+    }
+    public void curvatureDrive(double speed){
+        if(justEnteredCurvature){
+            navx.reset();
+            justEnteredCurvature = false;
+        }      
+        drive.curvatureDrive(speed, navx.getAngle() * 0.03, false);
+        System.out.println("Speed:" + speed +" Angle: " + navx.getAngle());
     }
 
     public void tankDrive(double left_speed, double right_speed){

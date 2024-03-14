@@ -64,12 +64,11 @@ public class TeleopCommand extends Command {
         if(drive_controller.getLeftY() >= 0.05 
         && drive_controller.getRightX() <= 0.05 
         && drive_controller.getRightX() >= -0.05){
-            m_drive.rightDriveSpeed(drive_controller.getLeftY());
-            double rightVoltage = m_drive.right_Front_Motor.getBusVoltage();
-            m_drive.left_Front_Motor.setVoltage(rightVoltage * 1.10);
+            m_drive.curvatureDrive(drive_controller.getLeftY());
         } else if(drive_controller.getLeftY() <= -0.05 
-        && drive_controller.getRightX() <= 0.05 
-        && drive_controller.getRightX() >= -0.05){
+        || drive_controller.getRightX() <= 0.05 
+        || drive_controller.getRightX() >= -0.05){
+            m_drive.justEnteredCurvature = true;
             m_drive.tankDrive(drive_controller.getLeftY(), drive_controller.getLeftY());
         } else {
             m_drive.arcadeDrive(0, 0);
