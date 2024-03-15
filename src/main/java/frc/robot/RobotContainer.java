@@ -13,6 +13,7 @@
 package frc.robot;
 
 import frc.robot.commands.*;
+import frc.robot.commands.Autonomoose.AutoArm;
 import frc.robot.commands.Autonomoose.AutoDriveStraight;
 import frc.robot.commands.Autonomoose.AutoIntake;
 import frc.robot.commands.Autonomoose.AutoShoot;
@@ -70,7 +71,8 @@ public class RobotContainer {
   private final Command m_3_leftLaneAuto = new WaitCommand(3).andThen(new AutoDriveStraight(m_drive, -30, 0.4)).andThen(new AutoTurn(m_drive, 50, 0.4)).andThen(new AutoShoot(m_shoot, 30)).andThen(new AutoTurn(m_drive, 50, 0.4)).andThen(new AutoDriveStraight(m_drive, -50, 0.4)).andThen(new AutoTurn(m_drive, 45,0.4)).andThen(new AutoDriveStraight(m_drive, 50, 0.4));
   private final Command m_4_leftLaneAuto = new WaitCommand(4).andThen(new AutoDriveStraight(m_drive, -30, 0.4)).andThen(new AutoTurn(m_drive, 50, 0.4)).andThen(new AutoShoot(m_shoot, 30)).andThen(new AutoTurn(m_drive, 50, 0.4)).andThen(new AutoDriveStraight(m_drive, -50, 0.4)).andThen(new AutoTurn(m_drive, 45,0.4)).andThen(new AutoDriveStraight(m_drive, 50, 0.4));
   private final Command m_5_leftLaneAuto = new WaitCommand(5).andThen(new AutoDriveStraight(m_drive, -30, 0.4)).andThen(new AutoTurn(m_drive, 50, 0.4)).andThen(new AutoShoot(m_shoot, 30)).andThen(new AutoTurn(m_drive, 50, 0.4)).andThen(new AutoDriveStraight(m_drive, -50, 0.4)).andThen(new AutoTurn(m_drive, 45,0.4)).andThen(new AutoDriveStraight(m_drive, 50, 0.4));
-
+  private final Command m_Red_AmpAuto = new AutoDriveStraight(m_drive, 15, 0.4).andThen(new AutoTurn(m_drive, -43, 0.4)).andThen(new AutoDriveStraight(m_drive, 7, 0.4)).andThen(new AutoArm(m_arm)).andThen(new AutoShoot(m_shoot, 30));
+  private final Command m_Blue_AmpAuto = new AutoDriveStraight(m_drive, 14, 0.4).andThen(new AutoTurn(m_drive, 95, 0.4)).andThen(new AutoDriveStraight(m_drive, 12, 0.4)).andThen(new AutoArm(m_arm)).andThen(new AutoShoot(m_shoot, 30));
 
   private RobotContainer() {
     NTManager.initialize();
@@ -90,6 +92,9 @@ public class RobotContainer {
     autoChooser.addOption("3 second Left Lane", m_3_leftLaneAuto);
     autoChooser.addOption("4 second Left Lane", m_4_leftLaneAuto);
     autoChooser.addOption("5 second Left Lane", m_5_leftLaneAuto);
+    autoChooser.addOption("Red Amp Auto", m_Red_AmpAuto);
+    autoChooser.addOption("Blue Amp Auto", m_Blue_AmpAuto);
+
 
     Shuffleboard.getTab("Autonomous").add(autoChooser);
     configureButtonBindings();

@@ -64,7 +64,8 @@ public class TeleopCommand extends Command {
                 drive_controller.getRightX() >= 0.05 ||
                 drive_controller.getRightX() <= -0.05
         ) {
-            m_drive.arcadeDrive(drive_controller.getLeftY(), drive_controller.getRightX());
+            m_drive.arcadeDrive(drive_controller.getLeftY(), drive_controller.getRightX());//drive_controller.getRightX());
+            //m_drive.tankDrive(drive_controller.getLeftY(), drive_controller.getRightY());
         }
         else {
             m_drive.arcadeDrive(0, 0);

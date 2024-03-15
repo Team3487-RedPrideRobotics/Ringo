@@ -67,8 +67,9 @@ public class DriveSubsystem extends SubsystemBase {
     
     public void arcadeDrive(double speed, double turning) {
         drive.arcadeDrive(speed * Constants.DriveEdits.DriveSpeed, turning * Constants.DriveEdits.TurnSpeed);
-        //System.out.println("Left: " + left_Front_Motor.getBusVoltage() + " Right: " + right_Front_Motor.getBusVoltage());
-
+        //System.out.println("Left front: " + left_Front_Motor.getBusVoltage() + " Right front: " + right_Front_Motor.getBusVoltage());
+        //System.out.println("Left back: " + left_Back_Motor.getBusVoltage() + " Right back: " + right_Back_Motor.getBusVoltage());
+        //left_Front_Motor.enableVoltageCompensation(turning);
     }
 
     public void tankDrive(double left_speed, double right_speed){

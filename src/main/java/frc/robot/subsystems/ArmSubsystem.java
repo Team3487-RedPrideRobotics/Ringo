@@ -34,30 +34,20 @@ public class ArmSubsystem extends SubsystemBase {
         rightArmMotor.set(speed * armEdits.armSpeed);
     }
 
-    public void goToAngle(double arm, double limit, double armkP, double threshold){
+    public boolean goToAngle(double arm, double limit, double armkP, double threshold){
         double armDelta = Math.abs(arm) - Math.abs(armEncoder.getPosition());
         System.out.println("arm difference: " + armDelta);
         System.out.println("arm position: " + getPosition());
 
-        /* 
-        if(-armEncoder.getPosition() >= arm){
-          setMotorSpeed(0);
-        } else if(Math.abs(armDelta) >= Constants.armEdits.AngleThreshold){
-          var motorSpeed = -armDelta*armkP;
-          motorSpeed = Math.abs(motorSpeed) > limit ? limit * Math.signum(motorSpeed) : motorSpeed;
-          System.out.println("motor speed: " + motorSpeed);
-          setMotorSpeed(motorSpeed);
-        } else {
-          setMotorSpeed(0);
-        }
-        */
         if(Math.abs(armDelta) >= threshold){
             var motorSpeed = -armDelta*armkP;
             motorSpeed = Math.abs(motorSpeed) > limit ? limit * Math.signum(motorSpeed) : motorSpeed;
             System.out.println("motor speed: " + motorSpeed);
             setMotorSpeed(motorSpeed);
+            return false;
           } else {
             setMotorSpeed(0);
+            return true;
           }
 
     
