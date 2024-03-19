@@ -22,6 +22,7 @@ public class TeleopCommand extends Command {
     private CameraSubsystem m_camera;
     private ArmSubsystem m_arm;
     private ColorSensorSubsystem m_color;
+    private int counter = 0;
     
     private XboxController drive_controller;
     private XboxController operator_controller;
@@ -63,9 +64,9 @@ public class TeleopCommand extends Command {
                 drive_controller.getLeftY() <= -0.05 ||
                 drive_controller.getRightX() >= 0.05 ||
                 drive_controller.getRightX() <= -0.05
-        ) {
+        )
+        {
             m_drive.arcadeDrive(drive_controller.getLeftY(), drive_controller.getRightX());//drive_controller.getRightX());
-            //m_drive.tankDrive(drive_controller.getLeftY(), drive_controller.getRightY());
         }
         else {
             m_drive.arcadeDrive(0, 0);
@@ -93,13 +94,16 @@ public class TeleopCommand extends Command {
             m_shoot.shoot(-shootEdits.shootSpeed);
         } else if(operator_controller.getLeftTriggerAxis() >= 0.05) {
             m_shoot.shoot(shootEdits.shootSpeed);
-        } else if(operator_controller.getRightBumperPressed()){
+        } else if (operator_controller.getRightBumperPressed()) {
+            m_shoot.shoot(-1);
+            m_intake.intake(intakeEdits.intakeSpeed);
+        } else if (operator_controller.getLeftBumperPressed()) {
             m_shoot.shoot(-1);
             m_intake.intake(intakeEdits.intakeSpeed);
         } else {
             m_shoot.shoot(0);
         }     
-        
+      
         if (operator_controller.getLeftY() >= 0.05 || operator_controller.getLeftY() <= -0.05) {
             m_climb.climb(-operator_controller.getLeftY());
         } else {

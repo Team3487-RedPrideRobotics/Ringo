@@ -21,7 +21,6 @@ public class CameraSubsystem extends SubsystemBase {
         
         camera1.setFPS(30);
         camera1.setResolution(1152 , 648);
-        System.out.println(camera1.getVideoMode());
         //VideoMode.PixelFormat.kMJPEG;
 
     }
