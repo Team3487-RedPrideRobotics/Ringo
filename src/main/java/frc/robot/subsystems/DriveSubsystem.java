@@ -12,10 +12,18 @@
 
 package frc.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.util.ReplanningConfig;
 import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelPositions;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -23,6 +31,7 @@ import frc.robot.Constants;
 
 public class DriveSubsystem extends SubsystemBase {
     
+    private AHRS navx;
     private CANSparkMax left_Back_Motor;
     private CANSparkMax left_Front_Motor;
     private CANSparkMax right_Back_Motor;
@@ -30,6 +39,10 @@ public class DriveSubsystem extends SubsystemBase {
     private RelativeEncoder leftEncoder;
     private RelativeEncoder rightEncoder;
     private DifferentialDrive drive;
+    private ChassisSpeeds chassisSpeeds;
+
+    private final DifferentialDriveOdometry odometry;
+
     
     public DriveSubsystem() {
         left_Back_Motor = new CANSparkMax(Constants.DriveConstants.left_Back_Motor_ID, CANSparkLowLevel.MotorType.kBrushless);
@@ -48,14 +61,52 @@ public class DriveSubsystem extends SubsystemBase {
         drive.setExpiration(0.1);
         drive.setMaxOutput(1.0);
 
+        //TODO make sure that conversion factor is for meters.
         leftEncoder = left_Front_Motor.getEncoder();
         leftEncoder.setPositionConversionFactor(Constants.DriveConstants.EncoderConversionFactor);
         rightEncoder = right_Front_Motor.getEncoder();
         rightEncoder.setPositionConversionFactor(Constants.DriveConstants.EncoderConversionFactor);
+
+        odometry = new DifferentialDriveOdometry(navx.getRotation2d(), leftEncoder.getPosition(), rightEncoder.getPosition());
+
+        chassisSpeeds = new ChassisSpeeds();
+
+        //Configures AutoBuilder
+        AutoBuilder.configureRamsete(
+            this::getPose, // Robot pose supplier
+            this::resetPose, // Method to reset odometry (will be called if your auto has a starting pose)
+            this::getCurrentSpeeds, // Current ChassisSpeeds supplier
+            this::drive, // Method that will drive the robot given ChassisSpeeds
+            new ReplanningConfig(), // Default path replanning config. See the API for the options here
+            () -> {
+              // Boolean supplier that controls when the path will be mirrored for the red alliance
+              // This will flip the path being followed to the red side of the field.
+              // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
+
+              var alliance = DriverStation.getAlliance();
+              if (alliance.isPresent()) {
+                return alliance.get() == DriverStation.Alliance.Red;
+              }
+              return false;
+            },
+            this // Reference to this subsystem to set requirements
+    );
     }
     
     @Override
     public void periodic() {
+        //42 is Hall-Sensor Encoder Resolution... 42 counts per rev
+        // 9.61 is gear ration for drive train, i dont think the number is right
+        // the other number is wheel cicumfrance in meters.
+        odometry.update(navx.getRotation2d(), 
+        leftEncoder.getPosition() / 42 / 9.61 * (0.1524 * Math.PI), 
+        rightEncoder.getPosition() / 42 / 9.61 * (0.1524 * Math.PI));
+
+        //these values need to be right
+        chassisSpeeds.omegaRadiansPerSecond = 000;
+        chassisSpeeds.vxMetersPerSecond = 000;
+        chassisSpeeds.vyMetersPerSecond = 000;
+
         Constants.DriveEdits.DriveSpeed = frc.robot.NTManager.driveSpeedSub.get();
         Constants.DriveEdits.TurnSpeed = frc.robot.NTManager.turnSpeedSub.get();
     }
@@ -88,6 +139,24 @@ public class DriveSubsystem extends SubsystemBase {
         leftEncoder.setPosition(0);
         rightEncoder.setPosition(0);
     }
+
+    public Pose2d getPose(){
+        return odometry.getPoseMeters();
+    }
+    //idk if reset pose works, this stuff is an acid trip
+    public void resetPose(Pose2d pose){
+        odometry.resetPosition(navx.getRotation2d(),  
+        leftEncoder.getPosition() / 42 / 9.61 * (0.1524 * Math.PI), 
+        rightEncoder.getPosition() / 42 / 9.61 * (0.1524 * Math.PI), 
+        pose);
+    }
+
+    public ChassisSpeeds getCurrentSpeeds(){
+        return chassisSpeeds;
+    }
+
+    
+    
     
 }
 

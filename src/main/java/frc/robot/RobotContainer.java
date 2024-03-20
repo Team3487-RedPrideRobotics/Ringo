@@ -19,6 +19,9 @@ import frc.robot.commands.Autonomoose.AutoIntake;
 import frc.robot.commands.Autonomoose.AutoShoot;
 import frc.robot.commands.Autonomoose.AutoTurn;
 import frc.robot.subsystems.*;
+
+import com.pathplanner.lib.auto.NamedCommands;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -50,6 +53,8 @@ public class RobotContainer {
   
   public final AutonomousCommand m_auto = new AutonomousCommand();
   public final TeleopCommand m_TeleopCommand = new TeleopCommand(m_drive, m_intake, m_climb, m_shoot, m_camera, m_arm, m_color);
+  
+  //Named Commands for PathPlanner
   
   // Joysticks
   private final XboxController m_driveController = new XboxController(1);

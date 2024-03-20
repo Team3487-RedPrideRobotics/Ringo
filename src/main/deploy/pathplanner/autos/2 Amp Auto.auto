@@ -16,6 +16,12 @@
           "data": {
             "pathName": "Go To Amp"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": null
+          }
         }
       ]
     }
