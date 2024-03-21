@@ -72,7 +72,7 @@ public class DriveSubsystem extends SubsystemBase {
         chassisSpeeds = new ChassisSpeeds();
 
         //Configures AutoBuilder
-        AutoBuilder.configureRamsete(
+        /*AutoBuilder.configureRamsete(
             this::getPose, // Robot pose supplier
             this::resetPose, // Method to reset odometry (will be called if your auto has a starting pose)
             this::getCurrentSpeeds, // Current ChassisSpeeds supplier
@@ -90,7 +90,7 @@ public class DriveSubsystem extends SubsystemBase {
               return false;
             },
             this // Reference to this subsystem to set requirements
-    );
+    ); */
     }
     
     @Override
