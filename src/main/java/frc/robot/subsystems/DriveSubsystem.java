@@ -56,6 +56,10 @@ public class DriveSubsystem extends SubsystemBase {
     
     @Override
     public void periodic() {
+        //System.out.println("Left Front: " + left_Front_Motor.getBusVoltage());
+        //System.out.println("Left Back: " + left_Back_Motor.getBusVoltage());
+        //System.out.println("Right Front: " + right_Front_Motor.getBusVoltage());
+        //System.out.println("Right Back: " + right_Back_Motor.getBusVoltage());
         Constants.DriveEdits.DriveSpeed = frc.robot.NTManager.driveSpeedSub.get();
         Constants.DriveEdits.TurnSpeed = frc.robot.NTManager.turnSpeedSub.get();
     }

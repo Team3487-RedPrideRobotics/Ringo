@@ -65,7 +65,7 @@ public class RobotContainer {
   private final Command m_4_rightLaneAuto = new WaitCommand(4).andThen(new AutoDriveStraight(m_drive, -30, 0.4)).andThen(new AutoTurn(m_drive, -100, 0.4)).andThen(new AutoShoot(m_shoot, 30)).andThen(new AutoTurn(m_drive, -90, 0.4)).andThen(new AutoDriveStraight(m_drive, -50, 0.4)).andThen(new AutoTurn(m_drive, -90,0.4)).andThen(new AutoDriveStraight(m_drive, 50, 0.4));
   private final Command m_5_rightLaneAuto = new WaitCommand(5).andThen(new AutoDriveStraight(m_drive, -30, 0.4)).andThen(new AutoTurn(m_drive, -100, 0.4)).andThen(new AutoShoot(m_shoot, 30)).andThen(new AutoTurn(m_drive, -90, 0.4)).andThen(new AutoDriveStraight(m_drive, -50, 0.4)).andThen(new AutoTurn(m_drive, -90,0.4)).andThen(new AutoDriveStraight(m_drive, 50, 0.4));
   private final Command m_8_rightLaneAuto = new WaitCommand(8).andThen(new AutoDriveStraight(m_drive, -30, 0.4)).andThen(new AutoTurn(m_drive, -100, 0.4)).andThen(new AutoShoot(m_shoot, 30)).andThen(new AutoTurn(m_drive, -90, 0.4)).andThen(new AutoDriveStraight(m_drive, -50, 0.4)).andThen(new AutoTurn(m_drive, -90,0.4)).andThen(new AutoDriveStraight(m_drive, 50, 0.4));
-  private final Command m_runForrest = new AutoIntake(-1.00, m_intake, -50).andThen(new AutoDriveStraight(m_drive, 242, 0.6)).andThen(new AutoTurn(m_drive, -180, 0.4));
+  private final Command m_runForrest = new AutoIntake(-1.00, m_intake, 50).andThen(new AutoDriveStraight(m_drive, 242, 0.6)).andThen(new AutoTurn(m_drive, -180, 0.4));
   private final Command m_0_leftLaneAuto = new WaitCommand(0).andThen(new AutoDriveStraight(m_drive, -30, 0.4)).andThen(new AutoTurn(m_drive, 50, 0.4)).andThen(new AutoShoot(m_shoot, 30)).andThen(new AutoTurn(m_drive, 50, 0.4)).andThen(new AutoDriveStraight(m_drive, -50, 0.4)).andThen(new AutoTurn(m_drive, 45,0.4)).andThen(new AutoDriveStraight(m_drive, 50, 0.4));
   private final Command m_1_leftLaneAuto = new WaitCommand(1).andThen(new AutoDriveStraight(m_drive, -30, 0.4)).andThen(new AutoTurn(m_drive, 50, 0.4)).andThen(new AutoShoot(m_shoot, 30)).andThen(new AutoTurn(m_drive, 50, 0.4)).andThen(new AutoDriveStraight(m_drive, -50, 0.4)).andThen(new AutoTurn(m_drive, 45,0.4)).andThen(new AutoDriveStraight(m_drive, 50, 0.4));
   private final Command m_2_leftLaneAuto = new WaitCommand(2).andThen(new AutoDriveStraight(m_drive, -30, 0.4)).andThen(new AutoTurn(m_drive, 50, 0.4)).andThen(new AutoShoot(m_shoot, 30)).andThen(new AutoTurn(m_drive, 50, 0.4)).andThen(new AutoDriveStraight(m_drive, -50, 0.4)).andThen(new AutoTurn(m_drive, 45,0.4)).andThen(new AutoDriveStraight(m_drive, 50, 0.4));
@@ -73,17 +73,21 @@ public class RobotContainer {
   private final Command m_4_leftLaneAuto = new WaitCommand(4).andThen(new AutoDriveStraight(m_drive, -30, 0.4)).andThen(new AutoTurn(m_drive, 50, 0.4)).andThen(new AutoShoot(m_shoot, 30)).andThen(new AutoTurn(m_drive, 50, 0.4)).andThen(new AutoDriveStraight(m_drive, -50, 0.4)).andThen(new AutoTurn(m_drive, 45,0.4)).andThen(new AutoDriveStraight(m_drive, 50, 0.4));
   private final Command m_5_leftLaneAuto = new WaitCommand(5).andThen(new AutoDriveStraight(m_drive, -30, 0.4)).andThen(new AutoTurn(m_drive, 50, 0.4)).andThen(new AutoShoot(m_shoot, 30)).andThen(new AutoTurn(m_drive, 50, 0.4)).andThen(new AutoDriveStraight(m_drive, -50, 0.4)).andThen(new AutoTurn(m_drive, 45,0.4)).andThen(new AutoDriveStraight(m_drive, 50, 0.4));
   private final Command m_8_leftLaneAuto = new WaitCommand(8).andThen(new AutoDriveStraight(m_drive, -30, 0.4)).andThen(new AutoTurn(m_drive, 50, 0.4)).andThen(new AutoShoot(m_shoot, 30)).andThen(new AutoTurn(m_drive, 50, 0.4)).andThen(new AutoDriveStraight(m_drive, -50, 0.4)).andThen(new AutoTurn(m_drive, 45,0.4)).andThen(new AutoDriveStraight(m_drive, 50, 0.4));
-  private final Command m_Leave_Red_AmpAuto = new AutoDriveStraight(m_drive, 15, 0.4).andThen(new AutoTurn(m_drive, -65, 0.4)).andThen(new AutoDriveStraight(m_drive, 7, 0.4)).andThen(new AutoArm(m_arm, true)).andThen(new AutoShoot(m_shoot, 30)).andThen(new AutoDriveStraight(m_drive, -4, 0.4)).andThen(new AutoTurn(m_drive, -100, 0.4)).andThen(new AutoDriveStraight(m_drive, -90, 0.4));
-  private final Command m_Stay_Red_AmpAuto = new AutoDriveStraight(m_drive, 15, 0.4).andThen(new AutoTurn(m_drive, -65, 0.4)).andThen(new AutoDriveStraight(m_drive, 7, 0.4)).andThen(new AutoArm(m_arm, true)).andThen(new AutoShoot(m_shoot, 30)).andThen(new AutoDriveStraight(m_drive, -4, 0.4));
-  private final Command m_Leave_Blue_AmpAuto = new AutoDriveStraight(m_drive, 14, 0.4).andThen(new AutoTurn(m_drive, 106, 0.4)).andThen(new AutoDriveStraight(m_drive, 12, 0.4)).andThen(new AutoArm(m_arm, true)).andThen(new AutoShoot(m_shoot, 30)).andThen(new AutoTurn(m_drive, -40, 0.4)).andThen(new AutoDriveStraight(m_drive, -4, 0.4));
+  private final Command m_2_Leave_Red_AmpAuto = new AutoDriveStraight(m_drive, 15, 0.4).andThen(new AutoTurn(m_drive, -60, 0.4)).andThen(new AutoDriveStraight(m_drive, 12, 0.4)).andThen(new AutoArm(m_arm, true)).andThen(new AutoShoot(m_shoot, 30)).andThen(new AutoArm(m_arm, false)).andThen(new AutoDriveStraight(m_drive, -4, 0.4)).andThen(new AutoTurn(m_drive, -72, 0.4)).andThen(new AutoDriveStraight(m_drive, -90, 0.4)).andThen(new AutoIntake(-1.00, m_intake, 50));
+  private final Command m_Leave_Red_AmpAuto = new AutoDriveStraight(m_drive, 15, 0.4).andThen(new AutoTurn(m_drive, -130, 0.4)).andThen(new AutoDriveStraight(m_drive, 12, 0.4)).andThen(new AutoArm(m_arm, true)).andThen(new AutoShoot(m_shoot, 30)).andThen(new AutoArm(m_arm, false)).andThen(new AutoDriveStraight(m_drive, -4, 0.4)).andThen(new AutoTurn(m_drive, -72, 0.4)).andThen(new AutoDriveStraight(m_drive, -90, 0.4));
+  private final Command m_Stay_Red_AmpAuto = new AutoDriveStraight(m_drive, 15, 0.4).andThen(new AutoTurn(m_drive, -130, 0.4)).andThen(new AutoDriveStraight(m_drive, 12, 0.4)).andThen(new AutoArm(m_arm, true)).andThen(new AutoShoot(m_shoot, 30)).andThen(new AutoDriveStraight(m_drive, -4, 0.4));
+  private final Command m_Leave_Blue_AmpAuto = new AutoDriveStraight(m_drive, 14, 0.4).andThen(new AutoTurn(m_drive, 120, 0.4)).andThen(new AutoDriveStraight(m_drive, 12, 0.4)).andThen(new AutoArm(m_arm, true)).andThen(new AutoShoot(m_shoot, 30)).andThen(new AutoTurn(m_drive, -40, 0.4)).andThen(new AutoDriveStraight(m_drive, -4, 0.4));
   private final Command m_Stay_Blue_AmpAuto = new AutoDriveStraight(m_drive, 14, 0.4).andThen(new AutoTurn(m_drive, 106, 0.4)).andThen(new AutoDriveStraight(m_drive, 12, 0.4)).andThen(new AutoArm(m_arm, true)).andThen(new AutoShoot(m_shoot, 30));
   private final Command m_2_Piece_MiddleAuto = new AutoShoot(m_shoot, 15).andThen(new WaitCommand(3)).andThen(new AutoDriveStraight(m_drive, -70, 0.6)).alongWith(new AutoIntake(1.00, m_intake, 220)).andThen(new WaitCommand(2)).andThen(new AutoDriveStraight(m_drive, 70, 0.4)).andThen(new AutoIntake(1.00, m_intake, 60)).alongWith(new AutoShoot(m_shoot, 70));
   private final Command m_shoot_leaveAuto = new AutoShoot(m_shoot, 30).andThen(new AutoDriveStraight(m_drive, -100, 0.4));
   private final Command m_SecondRoundExit = new AutoDriveStraight(m_drive, -500, 1);
+  private final Command m_Stay_Speaker = new  AutoShoot(m_shoot, 30);
+  private final Command m_AutoTesting = new WaitCommand(1).andThen(new AutoIntake(1.00, m_intake, 20)).alongWith(new AutoShoot(m_shoot, 150));
+  private final Command m_crossLine = new AutoDriveStraight(m_drive, -50, 0.5);
   private RobotContainer() {
     NTManager.initialize();
     autoChooser = new SendableChooser<Command>();
-    autoChooser.setDefaultOption("Cross Line", new AutoDriveStraight(m_drive, -50, .5));
+    autoChooser.setDefaultOption("Cross Line", m_crossLine);  
     autoChooser.addOption("0 Second Right Lane", m_0_rightLaneAuto);
     autoChooser.addOption("1 Second Right Lane", m_1_rightLaneAuto);
     autoChooser.addOption("2 Second Right Lane", m_2_rightLaneAuto);
@@ -92,6 +96,7 @@ public class RobotContainer {
     autoChooser.addOption("5 Second Right Lane", m_5_rightLaneAuto);
     autoChooser.addOption("8 Second Right Lane", m_8_rightLaneAuto);
     autoChooser.addOption("Middle Lane", m_middleLaneAuto);
+    autoChooser.addOption("Stay Shoot Speaker", m_Stay_Speaker);
     autoChooser.addOption("Spit note, then Drive To Middle", m_runForrest);
     autoChooser.addOption("0 Second Left Lane", m_0_leftLaneAuto);
     autoChooser.addOption("1 second Left Lane", m_1_leftLaneAuto);
@@ -101,9 +106,11 @@ public class RobotContainer {
     autoChooser.addOption("5 second Left Lane", m_5_leftLaneAuto);
     autoChooser.addOption("8 second Left Lane", m_8_leftLaneAuto);
     autoChooser.addOption("Red Leave Amp Auto", m_Leave_Red_AmpAuto);
+    autoChooser.addOption("Test", m_AutoTesting);
     autoChooser.addOption("Red Stay Amp Auto", m_Stay_Red_AmpAuto);
     autoChooser.addOption("Blue Leave Amp Auto", m_Leave_Blue_AmpAuto);
     autoChooser.addOption("Blue Stay Amp Auto",  m_Stay_Blue_AmpAuto);
+    autoChooser.addOption("2 Piece Red Amp Leave", m_2_Leave_Red_AmpAuto);
     autoChooser.addOption("Shoot then Leave", m_shoot_leaveAuto);
     autoChooser.addOption("Two Piece Middle", m_2_Piece_MiddleAuto);
     autoChooser.addOption("Second Round Exit", m_SecondRoundExit);

@@ -7,7 +7,8 @@ import frc.robot.subsystems.ArmSubsystem;
 public class AutoArm extends AutonomousCommand {
     private ArmSubsystem armSubsystem;
     private Boolean _up;
- 
+    private Integer counter = 0;
+
     public AutoArm(ArmSubsystem _ArmSubsystem, boolean up){
         armSubsystem = _ArmSubsystem;
         _up = up;
@@ -16,8 +17,9 @@ public class AutoArm extends AutonomousCommand {
     @Override
     public void execute(){
         if(_up){    
-            armSubsystem.goToAngle(-37, 0.6, armEdits.armKP, 15.5);
+            armSubsystem.goToAngle(-39, 0.6, armEdits.armKP, 15.5);
         } else {
+            counter ++;
             armSubsystem.goToAngle(0, 0.6, armEdits.armKP, 0);
         }
     }
@@ -25,9 +27,9 @@ public class AutoArm extends AutonomousCommand {
     @Override
     public boolean isFinished() {
         if(_up){
-            return armSubsystem.goToAngle(-37, 0.6, armEdits.armKP, 15.5);
+            return armSubsystem.goToAngle(-39, 0.6, armEdits.armKP, 15.5);
         } else {
-            return armSubsystem.goToAngle(0, 0.6, armEdits.armKP, 0);
+            return counter >= 50;
         }
     }
 }
