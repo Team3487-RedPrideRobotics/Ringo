@@ -47,6 +47,7 @@ public class RobotContainer {
   public final CameraSubsystem m_camera = new CameraSubsystem();
   public final ArmSubsystem m_arm = new ArmSubsystem();
   public final ColorSensorSubsystem m_color = new ColorSensorSubsystem();
+  public final LEDSubsystem m_led = new LEDSubsystem();
   
   public final AutonomousCommand m_auto = new AutonomousCommand();
   public final TeleopCommand m_TeleopCommand = new TeleopCommand(m_drive, m_intake, m_climb, m_shoot, m_camera, m_arm, m_color);
