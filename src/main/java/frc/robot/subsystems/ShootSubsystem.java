@@ -17,6 +17,8 @@ import frc.robot.Constants.shootConstants;
 import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
 
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShootSubsystem extends SubsystemBase {
@@ -44,5 +46,18 @@ public class ShootSubsystem extends SubsystemBase {
         rightShootMotor.set(-speed);
     }
 
+    public void shootOut(){
+        leftShootMotor.set(Constants.shootEdits.shootSpeed);
+        rightShootMotor.set(-Constants.shootEdits.shootSpeed);
+    }
+
+    public Command shootOutCommand(){
+        return Commands.runOnce(null, this);
+    }
+    
+    public void disableShootMotors(){
+        leftShootMotor.set(0);
+        rightShootMotor.set(0);
+    }
 }
 

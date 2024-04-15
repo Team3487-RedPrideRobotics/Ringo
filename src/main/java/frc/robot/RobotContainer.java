@@ -50,8 +50,12 @@ public class RobotContainer {
   //public final LEDSubsystem m_led = new LEDSubsystem();
   
   public final AutonomousCommand m_auto = new AutonomousCommand();
-  public final TeleopCommand m_TeleopCommand = new TeleopCommand(m_drive, m_intake, m_climb, m_shoot, m_camera, m_arm, m_color);
+  //public final TeleopCommand m_TeleopCommand = new TeleopCommand(m_drive, m_intake, m_climb, m_shoot, m_camera, m_arm, m_color);
   
+  //Functionality Commands
+  public final ShootOut shootOut = new ShootOut(m_shoot);
+  public final DisableShootMotors disableShootMotors = new DisableShootMotors(m_shoot);
+
   // Joysticks
   private final XboxController m_driveController = new XboxController(1);
   private final XboxController m_operatorController = new XboxController(0);
@@ -126,7 +130,18 @@ public class RobotContainer {
   }
   
   private void configureButtonBindings() {
+    //In theory this would drive as normal.
+    m_drive.setDefaultCommand(
+      new DefaultDrive(
+        m_drive, 
+        () -> -m_driveController.getLeftY(), 
+        () -> -m_driveController.getRightX()));
+    //---------------------------------------//
+    //
+    m_operatorController.rightTrigger(whileTrue(m_shoot.shootOutCommand()));
+      
   }
+
   
   public Command getAutonomousCommand() {
     m_drive.resetEncoders();
@@ -134,9 +149,9 @@ public class RobotContainer {
     return autoChooser.getSelected();
   }
   
-  public TeleopCommand getTeleopCommand() {
-    return m_TeleopCommand;
-  }
+  //public TeleopCommand getTeleopCommand() {
+    //return m_TeleopCommand;
+  //}
   
   public XboxController getDriveController() {
     return m_driveController;
