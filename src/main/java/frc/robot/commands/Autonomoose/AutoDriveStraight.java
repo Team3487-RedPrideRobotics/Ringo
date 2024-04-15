@@ -20,8 +20,6 @@ public class AutoDriveStraight extends AutonomousCommand {
     }
      @Override
     public void execute() {
-    pastEncoder = m_drive.getLeftDriveEncoder();
-    System.out.println("Left Encoder:" + m_drive.getLeftDriveEncoder());
         if(_distance >= 0){
             if(m_drive.getLeftDriveEncoder() >= _distance ){
                 m_drive.tankDrive(0, 0);
@@ -43,8 +41,6 @@ public class AutoDriveStraight extends AutonomousCommand {
     
     @Override
     public boolean isFinished() {
-        if(pastEncoder == m_drive.getLeftDriveEncoder()) counter++;
-        if(counter > 5) done = true;
         if(done) m_drive.resetEncoders();
         return done;
         

@@ -17,8 +17,10 @@ import frc.robot.Constants;
 
 public class LEDSubsystem extends SubsystemBase {
   private Spark blinkin;
-  private static double red  = -0.25;
-  private static double blue = -0.23;
+  private static double bRed  = -0.17;
+  private static double bBlue = -0.15;
+  private static double sRed = 0.61;
+  private static double sBlue = 0.87;
   private static double rainbow = -0.99;
 
   public LEDSubsystem(){
@@ -30,25 +32,18 @@ public class LEDSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    if(DriverStation.getAlliance() != null){
-        if(DriverStation.isDisabled()){
-          toggleRainbow();
-        } else if (DriverStation.getAlliance().get() == DriverStation.Alliance.Blue){
-          toggleBlue();
-        } else if (DriverStation.getAlliance().get() == DriverStation.Alliance.Red){
-          toggleRed();
+      /*
+        if(DriverStation.isDisabled() && DriverStation.getAlliance().get() == DriverStation.Alliance.Blue){
+          blinkin.set(-0.15);
+        } else if (!DriverStation.isDisabled() && DriverStation.getAlliance().get() == DriverStation.Alliance.Blue){
+          blinkin.set(0.87);
+        } else if (DriverStation.isDisabled() && DriverStation.getAlliance().get() == DriverStation.Alliance.Red){
+          blinkin.set(-0.17);
+        } else if (!DriverStation.isDisabled() && DriverStation.getAlliance().get() == DriverStation.Alliance.Red){
+          blinkin.set(0.61);
         }
-    }
+        */
   }
   
   
-  public void toggleRed(){
-    blinkin.set(red);
-  }
-  public void toggleBlue(){
-    blinkin.set(blue);
-  }
-  public void toggleRainbow(){
-    blinkin.set(rainbow);
-  }
 }
