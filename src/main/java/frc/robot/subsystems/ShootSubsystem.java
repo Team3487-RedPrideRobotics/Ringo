@@ -50,10 +50,6 @@ public class ShootSubsystem extends SubsystemBase {
         leftShootMotor.set(Constants.shootEdits.shootSpeed);
         rightShootMotor.set(-Constants.shootEdits.shootSpeed);
     }
-
-    public Command shootOutCommand(){
-        return Commands.runOnce(null, this);
-    }
     
     public void disableShootMotors(){
         leftShootMotor.set(0);
