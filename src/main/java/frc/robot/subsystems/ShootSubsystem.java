@@ -13,12 +13,15 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import frc.robot.Constants.shootConstants;
 import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShootSubsystem extends SubsystemBase {
@@ -54,6 +57,20 @@ public class ShootSubsystem extends SubsystemBase {
     public void disableShootMotors(){
         leftShootMotor.set(0);
         rightShootMotor.set(0);
+    }
+
+    public Command shootOutCommand(){
+        return startEnd(
+            () -> {
+                shootOut();
+            },
+             () -> {
+                disableShootMotors();
+            });
+    }
+
+    public boolean operatorRightTrigger(){
+        return RobotContainer.m_operatorController.getRightTriggerAxis() >= 0.5;
     }
 }
 
