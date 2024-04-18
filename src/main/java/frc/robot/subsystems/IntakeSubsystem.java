@@ -38,5 +38,14 @@ public class IntakeSubsystem extends SubsystemBase {
     public void intake(double speed){
         floorIntake.set(-speed);   
     }
+    public void intakeIn(){
+        floorIntake.set(-1);
+    }
+    public void intakeOut(){
+        floorIntake.set(1);   
+    }
+    public void disableIntakeMotors(){
+        floorIntake.set(0);
+    }
 }
 
